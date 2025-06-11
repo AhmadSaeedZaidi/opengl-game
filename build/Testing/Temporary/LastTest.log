@@ -1,79 +1,36 @@
-Start testing: Jun 11 11:22 Pakistan Standard Time
+Start testing: Jun 11 14:42 Pakistan Standard Time
 ----------------------------------------------------------
-1/2 Testing: TestA
-1/2 Test: TestA
-Command: "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test/TestA.exe"
-Directory: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test
-"TestA" start time: Jun 11 11:22 Pakistan Standard Time
+1/1 Testing: shadersTest
+1/1 Test: shadersTest
+Command: "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/shaders/test/shadersTest.exe"
+Directory: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/shaders/test
+"shadersTest" start time: Jun 11 14:42 Pakistan Standard Time
 Output:
 ----------------------------------------------------------
-Running main() from C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/src/gtest_main.cc
-[==========] Running 2 tests from 1 test suite.
+[==========] Running 5 tests from 1 test suite.
 [----------] Global test environment set-up.
-[----------] 2 tests from ClassATest
-[ RUN      ] ClassATest.Addition
-[       OK ] ClassATest.Addition (0 ms)
-[ RUN      ] ClassATest.Subtraction
-C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestA.cpp:14: Failure
-Expected equality of these values:
-  obj.Subtraction(5, 3)
-    Which is: 3
-  2
-
-C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestA.cpp:15: Failure
-Expected equality of these values:
-  obj.Subtraction(5, 2)
-    Which is: 4
-  3
-
-C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestA.cpp:16: Failure
-Expected equality of these values:
-  obj.Subtraction(5, 1)
-    Which is: 5
-  4
-
-C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestA.cpp:17: Failure
-Expected equality of these values:
-  obj.Subtraction(1, 3)
-    Which is: -1
-  -2
-
-[  FAILED  ] ClassATest.Subtraction (0 ms)
-[----------] 2 tests from ClassATest (0 ms total)
+[----------] 5 tests from ShaderTest
+[ RUN      ] ShaderTest.ConstructorWithValidFiles
+[       OK ] ShaderTest.ConstructorWithValidFiles (109 ms)
+[ RUN      ] ShaderTest.ConstructorWithInvalidSyntax
+[       OK ] ShaderTest.ConstructorWithInvalidSyntax (61 ms)
+[ RUN      ] ShaderTest.ConstructorWithMissingFiles
+[       OK ] ShaderTest.ConstructorWithMissingFiles (41 ms)
+[ RUN      ] ShaderTest.UniformMethods
+[       OK ] ShaderTest.UniformMethods (53 ms)
+[ RUN      ] ShaderTest.InvalidUniformNames
+[       OK ] ShaderTest.InvalidUniformNames (69 ms)
+[----------] 5 tests from ShaderTest (336 ms total)
 
 [----------] Global test environment tear-down
-[==========] 2 tests from 1 test suite ran. (0 ms total)
-[  PASSED  ] 1 test.
-[  FAILED  ] 1 test, listed below:
-[  FAILED  ] ClassATest.Subtraction
-
- 1 FAILED TEST
+[==========] 5 tests from 1 test suite ran. (336 ms total)
+[  PASSED  ] 5 tests.
 <end of output>
-Test time =   0.06 sec
-----------------------------------------------------------
-Test Failed.
-"TestA" end time: Jun 11 11:22 Pakistan Standard Time
-"TestA" time elapsed: 00:00:00
-----------------------------------------------------------
-
-2/2 Testing: TestB
-2/2 Test: TestB
-Command: "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test/TestB.exe"
-Directory: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test
-"TestB" start time: Jun 11 11:22 Pakistan Standard Time
-Output:
-----------------------------------------------------------
-Running main() from C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/src/gtest_main.cc
-This test program does NOT link in any test case. Please make sure this is intended.
-[==========] Running 0 tests from 0 test suites.
-[==========] 0 tests from 0 test suites ran. (0 ms total)
-[  PASSED  ] 0 tests.
-<end of output>
-Test time =   0.08 sec
+Test time =   0.50 sec
 ----------------------------------------------------------
 Test Passed.
-"TestB" end time: Jun 11 11:22 Pakistan Standard Time
-"TestB" time elapsed: 00:00:00
+"shadersTest" end time: Jun 11 14:42 Pakistan Standard Time
+"shadersTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jun 11 11:22 Pakistan Standard Time
+End testing: Jun 11 14:42 Pakistan Standard Time

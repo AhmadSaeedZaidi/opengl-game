@@ -408,6 +408,9 @@ gtest_force_shared_crt:BOOL=OFF
 //Build gtest with internal symbols hidden in shared libraries.
 gtest_hide_internal_symbols:BOOL=OFF
 
+//Dependencies for the target
+shaders_LIB_DEPENDS:STATIC=general;glad;general;glfw;
+
 
 ########################
 # INTERNAL cache entries

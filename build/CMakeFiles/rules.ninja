@@ -22,7 +22,7 @@ rule CUSTOM_COMMAND
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__mylib_unscanned_
+rule CXX_COMPILER__shaders_unscanned_
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\msys64\mingw64\bin\c++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -32,7 +32,7 @@ rule CXX_COMPILER__mylib_unscanned_
 #############################################
 # Rule for linking CXX static library.
 
-rule CXX_STATIC_LIBRARY_LINKER__mylib_
+rule CXX_STATIC_LIBRARY_LINKER__shaders_
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\msys64\mingw64\bin\cmake.exe -E rm -f $TARGET_FILE && C:\msys64\mingw64\bin\ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\msys64\mingw64\bin\ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking CXX static library $TARGET_FILE
   restat = $RESTAT
@@ -41,7 +41,7 @@ rule CXX_STATIC_LIBRARY_LINKER__mylib_
 #############################################
 # Rule for compiling CXX files.
 
-rule CXX_COMPILER__TestA_unscanned_
+rule CXX_COMPILER__shadersTest_unscanned_
   depfile = $DEP_FILE
   deps = gcc
   command = ${LAUNCHER}${CODE_CHECK}C:\msys64\mingw64\bin\c++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -51,26 +51,7 @@ rule CXX_COMPILER__TestA_unscanned_
 #############################################
 # Rule for linking CXX executable.
 
-rule CXX_EXECUTABLE_LINKER__TestA_
-  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\msys64\mingw64\bin\c++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
-  description = Linking CXX executable $TARGET_FILE
-  restat = $RESTAT
-
-
-#############################################
-# Rule for compiling CXX files.
-
-rule CXX_COMPILER__TestB_unscanned_
-  depfile = $DEP_FILE
-  deps = gcc
-  command = ${LAUNCHER}${CODE_CHECK}C:\msys64\mingw64\bin\c++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
-  description = Building CXX object $out
-
-
-#############################################
-# Rule for linking CXX executable.
-
-rule CXX_EXECUTABLE_LINKER__TestB_
+rule CXX_EXECUTABLE_LINKER__shadersTest_
   command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\msys64\mingw64\bin\c++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT

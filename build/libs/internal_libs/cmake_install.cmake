@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/cmake_install.cmake")
+  include("C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/shaders/cmake_install.cmake")
 
 endif()
 

@@ -282,263 +282,225 @@ build libs/internal_libs/install/strip: phony libs/internal_libs/CMakeFiles/inst
 # =============================================================================
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target mylib
+# Object build statements for STATIC_LIBRARY target shaders
 
 
 #############################################
-# Order-only phony target for mylib
+# Order-only phony target for shaders
 
-build cmake_object_order_depends_target_mylib: phony || .
+build cmake_object_order_depends_target_shaders: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
 
-build libs/internal_libs/mylib/CMakeFiles/mylib.dir/src/A.cpp.obj: CXX_COMPILER__mylib_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/src/A.cpp || cmake_object_order_depends_target_mylib
-  DEP_FILE = libs\internal_libs\mylib\CMakeFiles\mylib.dir\src\A.cpp.obj.d
-  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/include"
-  OBJECT_DIR = libs\internal_libs\mylib\CMakeFiles\mylib.dir
-  OBJECT_FILE_DIR = libs\internal_libs\mylib\CMakeFiles\mylib.dir\src
-
-build libs/internal_libs/mylib/CMakeFiles/mylib.dir/src/B.cpp.obj: CXX_COMPILER__mylib_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/src/B.cpp || cmake_object_order_depends_target_mylib
-  DEP_FILE = libs\internal_libs\mylib\CMakeFiles\mylib.dir\src\B.cpp.obj.d
-  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/include"
-  OBJECT_DIR = libs\internal_libs\mylib\CMakeFiles\mylib.dir
-  OBJECT_FILE_DIR = libs\internal_libs\mylib\CMakeFiles\mylib.dir\src
+build libs/internal_libs/shaders/CMakeFiles/shaders.dir/src/shaders.cpp.obj: CXX_COMPILER__shaders_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/src/shaders.cpp || cmake_object_order_depends_target_shaders
+  DEP_FILE = libs\internal_libs\shaders\CMakeFiles\shaders.dir\src\shaders.cpp.obj.d
+  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/shaders/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glad/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/include"
+  OBJECT_DIR = libs\internal_libs\shaders\CMakeFiles\shaders.dir
+  OBJECT_FILE_DIR = libs\internal_libs\shaders\CMakeFiles\shaders.dir\src
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target mylib
+# Link build statements for STATIC_LIBRARY target shaders
 
 
 #############################################
-# Link the static library libs\internal_libs\mylib\libmylib.a
+# Link the static library libs\internal_libs\shaders\libshaders.a
 
-build libs/internal_libs/mylib/libmylib.a: CXX_STATIC_LIBRARY_LINKER__mylib_ libs/internal_libs/mylib/CMakeFiles/mylib.dir/src/A.cpp.obj libs/internal_libs/mylib/CMakeFiles/mylib.dir/src/B.cpp.obj
-  OBJECT_DIR = libs\internal_libs\mylib\CMakeFiles\mylib.dir
+build libs/internal_libs/shaders/libshaders.a: CXX_STATIC_LIBRARY_LINKER__shaders_ libs/internal_libs/shaders/CMakeFiles/shaders.dir/src/shaders.cpp.obj || libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a
+  OBJECT_DIR = libs\internal_libs\shaders\CMakeFiles\shaders.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = libs\internal_libs\mylib\libmylib.a
-  TARGET_PDB = mylib.a.dbg
+  TARGET_FILE = libs\internal_libs\shaders\libshaders.a
+  TARGET_PDB = shaders.a.dbg
 
 
 #############################################
 # Utility command for test
 
-build libs/internal_libs/mylib/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\ctest.exe "
+build libs/internal_libs/shaders/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\ctest.exe "
   DESC = Running tests...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test: phony libs/internal_libs/mylib/CMakeFiles/test.util
+build libs/internal_libs/shaders/test: phony libs/internal_libs/shaders/CMakeFiles/test.util
 
 
 #############################################
 # Utility command for edit_cache
 
-build libs/internal_libs/mylib/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+build libs/internal_libs/shaders/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
-build libs/internal_libs/mylib/edit_cache: phony libs/internal_libs/mylib/CMakeFiles/edit_cache.util
+build libs/internal_libs/shaders/edit_cache: phony libs/internal_libs/shaders/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build libs/internal_libs/mylib/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game" -B"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build""
+build libs/internal_libs/shaders/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game" -B"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build""
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/rebuild_cache: phony libs/internal_libs/mylib/CMakeFiles/rebuild_cache.util
+build libs/internal_libs/shaders/rebuild_cache: phony libs/internal_libs/shaders/CMakeFiles/rebuild_cache.util
 
 
 #############################################
 # Utility command for list_install_components
 
-build libs/internal_libs/mylib/list_install_components: phony
+build libs/internal_libs/shaders/list_install_components: phony
 
 
 #############################################
 # Utility command for install
 
-build libs/internal_libs/mylib/CMakeFiles/install.util: CUSTOM_COMMAND libs/internal_libs/mylib/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake"
+build libs/internal_libs/shaders/CMakeFiles/install.util: CUSTOM_COMMAND libs/internal_libs/shaders/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/install: phony libs/internal_libs/mylib/CMakeFiles/install.util
+build libs/internal_libs/shaders/install: phony libs/internal_libs/shaders/CMakeFiles/install.util
 
 
 #############################################
 # Utility command for install/local
 
-build libs/internal_libs/mylib/CMakeFiles/install/local.util: CUSTOM_COMMAND libs/internal_libs/mylib/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+build libs/internal_libs/shaders/CMakeFiles/install/local.util: CUSTOM_COMMAND libs/internal_libs/shaders/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/install/local: phony libs/internal_libs/mylib/CMakeFiles/install/local.util
+build libs/internal_libs/shaders/install/local: phony libs/internal_libs/shaders/CMakeFiles/install/local.util
 
 
 #############################################
 # Utility command for install/strip
 
-build libs/internal_libs/mylib/CMakeFiles/install/strip.util: CUSTOM_COMMAND libs/internal_libs/mylib/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+build libs/internal_libs/shaders/CMakeFiles/install/strip.util: CUSTOM_COMMAND libs/internal_libs/shaders/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/install/strip: phony libs/internal_libs/mylib/CMakeFiles/install/strip.util
+build libs/internal_libs/shaders/install/strip: phony libs/internal_libs/shaders/CMakeFiles/install/strip.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/CMakeLists.txt
+# C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/shaders/CMakeLists.txt
 # =============================================================================
 
 # =============================================================================
-# Object build statements for EXECUTABLE target TestA
+# Object build statements for EXECUTABLE target shadersTest
 
 
 #############################################
-# Order-only phony target for TestA
+# Order-only phony target for shadersTest
 
-build cmake_object_order_depends_target_TestA: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_mylib
+build cmake_object_order_depends_target_shadersTest: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_shaders
 
-build libs/internal_libs/mylib/test/CMakeFiles/TestA.dir/TestA.cpp.obj: CXX_COMPILER__TestA_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestA.cpp || cmake_object_order_depends_target_TestA
-  DEP_FILE = libs\internal_libs\mylib\test\CMakeFiles\TestA.dir\TestA.cpp.obj.d
-  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest"
-  OBJECT_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestA.dir
-  OBJECT_FILE_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestA.dir
+build libs/internal_libs/shaders/test/CMakeFiles/shadersTest.dir/shadersTest.cpp.obj: CXX_COMPILER__shadersTest_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/test/shadersTest.cpp || cmake_object_order_depends_target_shadersTest
+  DEP_FILE = libs\internal_libs\shaders\test\CMakeFiles\shadersTest.dir\shadersTest.cpp.obj.d
+  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/shaders/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glad/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest"
+  OBJECT_DIR = libs\internal_libs\shaders\test\CMakeFiles\shadersTest.dir
+  OBJECT_FILE_DIR = libs\internal_libs\shaders\test\CMakeFiles\shadersTest.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target TestA
+# Link build statements for EXECUTABLE target shadersTest
 
 
 #############################################
-# Link the executable libs\internal_libs\mylib\test\TestA.exe
+# Link the executable libs\internal_libs\shaders\test\shadersTest.exe
 
-build libs/internal_libs/mylib/test/TestA.exe: CXX_EXECUTABLE_LINKER__TestA_ libs/internal_libs/mylib/test/CMakeFiles/TestA.dir/TestA.cpp.obj | libs/internal_libs/mylib/libmylib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libs/internal_libs/mylib/libmylib.a
-  LINK_LIBRARIES = libs/internal_libs/mylib/libmylib.a  lib/libgtest.a  lib/libgtest_main.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestA.dir
+build libs/internal_libs/shaders/test/shadersTest.exe: CXX_EXECUTABLE_LINKER__shadersTest_ libs/internal_libs/shaders/test/CMakeFiles/shadersTest.dir/shadersTest.cpp.obj | libs/internal_libs/shaders/libshaders.a lib/libgtest.a lib/libgtest_main.a libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a libs/internal_libs/shaders/libshaders.a
+  LINK_LIBRARIES = libs/internal_libs/shaders/libshaders.a  lib/libgtest.a  lib/libgtest_main.a  libs/external_libs/glad/libglad.a  libs/external_libs/glfw-3.4/src/libglfw3.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = libs\internal_libs\shaders\test\CMakeFiles\shadersTest.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = libs\internal_libs\mylib\test\TestA.exe
-  TARGET_IMPLIB = libs\internal_libs\mylib\test\libTestA.dll.a
-  TARGET_PDB = TestA.exe.dbg
-
-# =============================================================================
-# Object build statements for EXECUTABLE target TestB
-
-
-#############################################
-# Order-only phony target for TestB
-
-build cmake_object_order_depends_target_TestB: phony || cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_mylib
-
-build libs/internal_libs/mylib/test/CMakeFiles/TestB.dir/TestB.cpp.obj: CXX_COMPILER__TestB_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/test/TestB.cpp || cmake_object_order_depends_target_TestB
-  DEP_FILE = libs\internal_libs\mylib\test\CMakeFiles\TestB.dir\TestB.cpp.obj.d
-  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/mylib/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/include" -isystem "C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/googletest/googletest"
-  OBJECT_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestB.dir
-  OBJECT_FILE_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestB.dir
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target TestB
-
-
-#############################################
-# Link the executable libs\internal_libs\mylib\test\TestB.exe
-
-build libs/internal_libs/mylib/test/TestB.exe: CXX_EXECUTABLE_LINKER__TestB_ libs/internal_libs/mylib/test/CMakeFiles/TestB.dir/TestB.cpp.obj | libs/internal_libs/mylib/libmylib.a lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a libs/internal_libs/mylib/libmylib.a
-  LINK_LIBRARIES = libs/internal_libs/mylib/libmylib.a  lib/libgtest.a  lib/libgtest_main.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = libs\internal_libs\mylib\test\CMakeFiles\TestB.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = libs\internal_libs\mylib\test\TestB.exe
-  TARGET_IMPLIB = libs\internal_libs\mylib\test\libTestB.dll.a
-  TARGET_PDB = TestB.exe.dbg
+  TARGET_FILE = libs\internal_libs\shaders\test\shadersTest.exe
+  TARGET_IMPLIB = libs\internal_libs\shaders\test\libshadersTest.dll.a
+  TARGET_PDB = shadersTest.exe.dbg
 
 
 #############################################
 # Utility command for test
 
-build libs/internal_libs/mylib/test/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\ctest.exe "
+build libs/internal_libs/shaders/test/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\ctest.exe "
   DESC = Running tests...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test/test: phony libs/internal_libs/mylib/test/CMakeFiles/test.util
+build libs/internal_libs/shaders/test/test: phony libs/internal_libs/shaders/test/CMakeFiles/test.util
 
 
 #############################################
 # Utility command for edit_cache
 
-build libs/internal_libs/mylib/test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+build libs/internal_libs/shaders/test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
-build libs/internal_libs/mylib/test/edit_cache: phony libs/internal_libs/mylib/test/CMakeFiles/edit_cache.util
+build libs/internal_libs/shaders/test/edit_cache: phony libs/internal_libs/shaders/test/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build libs/internal_libs/mylib/test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game" -B"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build""
+build libs/internal_libs/shaders/test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game" -B"C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build""
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test/rebuild_cache: phony libs/internal_libs/mylib/test/CMakeFiles/rebuild_cache.util
+build libs/internal_libs/shaders/test/rebuild_cache: phony libs/internal_libs/shaders/test/CMakeFiles/rebuild_cache.util
 
 
 #############################################
 # Utility command for list_install_components
 
-build libs/internal_libs/mylib/test/list_install_components: phony
+build libs/internal_libs/shaders/test/list_install_components: phony
 
 
 #############################################
 # Utility command for install
 
-build libs/internal_libs/mylib/test/CMakeFiles/install.util: CUSTOM_COMMAND libs/internal_libs/mylib/test/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake"
+build libs/internal_libs/shaders/test/CMakeFiles/install.util: CUSTOM_COMMAND libs/internal_libs/shaders/test/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\cmake.exe -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test/install: phony libs/internal_libs/mylib/test/CMakeFiles/install.util
+build libs/internal_libs/shaders/test/install: phony libs/internal_libs/shaders/test/CMakeFiles/install.util
 
 
 #############################################
 # Utility command for install/local
 
-build libs/internal_libs/mylib/test/CMakeFiles/install/local.util: CUSTOM_COMMAND libs/internal_libs/mylib/test/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+build libs/internal_libs/shaders/test/CMakeFiles/install/local.util: CUSTOM_COMMAND libs/internal_libs/shaders/test/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test/install/local: phony libs/internal_libs/mylib/test/CMakeFiles/install/local.util
+build libs/internal_libs/shaders/test/install/local: phony libs/internal_libs/shaders/test/CMakeFiles/install/local.util
 
 
 #############################################
 # Utility command for install/strip
 
-build libs/internal_libs/mylib/test/CMakeFiles/install/strip.util: CUSTOM_COMMAND libs/internal_libs/mylib/test/all
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\mylib\test" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
+build libs/internal_libs/shaders/test/CMakeFiles/install/strip.util: CUSTOM_COMMAND libs/internal_libs/shaders/test/all
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D "C:\Users\Zaidi\OneDrive - Higher Education Commission\Documents\course books\internship-arc\opengl-game\build\libs\internal_libs\shaders\test" && C:\msys64\mingw64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake"
   DESC = Installing the project stripped...
   pool = console
   restat = 1
 
-build libs/internal_libs/mylib/test/install/strip: phony libs/internal_libs/mylib/test/CMakeFiles/install/strip.util
+build libs/internal_libs/shaders/test/install/strip: phony libs/internal_libs/shaders/test/CMakeFiles/install/strip.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -1581,11 +1543,11 @@ build libs/external_libs/googletest/googletest/install/strip: phony libs/externa
 #############################################
 # Order-only phony target for my_game
 
-build cmake_object_order_depends_target_my_game: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
+build cmake_object_order_depends_target_my_game: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw cmake_object_order_depends_target_shaders
 
 build apps/CMakeFiles/my_game.dir/main.cpp.obj: CXX_COMPILER__my_game_unscanned_ C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/apps/main.cpp || cmake_object_order_depends_target_my_game
   DEP_FILE = apps\CMakeFiles\my_game.dir\main.cpp.obj.d
-  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glad/include"
+  INCLUDES = -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glad/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/include" -I"C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/libs/internal_libs/shaders/include"
   OBJECT_DIR = apps\CMakeFiles\my_game.dir
   OBJECT_FILE_DIR = apps\CMakeFiles\my_game.dir
 
@@ -1597,8 +1559,8 @@ build apps/CMakeFiles/my_game.dir/main.cpp.obj: CXX_COMPILER__my_game_unscanned_
 #############################################
 # Link the executable apps\my_game.exe
 
-build apps/my_game.exe: CXX_EXECUTABLE_LINKER__my_game_ apps/CMakeFiles/my_game.dir/main.cpp.obj | libs/external_libs/glfw-3.4/src/libglfw3.a libs/external_libs/glad/libglad.a || libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a
-  LINK_LIBRARIES = libs/external_libs/glfw-3.4/src/libglfw3.a  libs/external_libs/glad/libglad.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+build apps/my_game.exe: CXX_EXECUTABLE_LINKER__my_game_ apps/CMakeFiles/my_game.dir/main.cpp.obj | libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a libs/internal_libs/shaders/libshaders.a libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a || libs/external_libs/glad/libglad.a libs/external_libs/glfw-3.4/src/libglfw3.a libs/internal_libs/shaders/libshaders.a
+  LINK_LIBRARIES = libs/external_libs/glad/libglad.a  libs/external_libs/glfw-3.4/src/libglfw3.a  libs/internal_libs/shaders/libshaders.a  libs/external_libs/glad/libglad.a  libs/external_libs/glfw-3.4/src/libglfw3.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = apps\CMakeFiles\my_game.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -1686,14 +1648,6 @@ build apps/install/strip: phony apps/CMakeFiles/install/strip.util
 # =============================================================================
 # Target aliases.
 
-build TestA: phony libs/internal_libs/mylib/test/TestA.exe
-
-build TestA.exe: phony libs/internal_libs/mylib/test/TestA.exe
-
-build TestB: phony libs/internal_libs/mylib/test/TestB.exe
-
-build TestB.exe: phony libs/internal_libs/mylib/test/TestB.exe
-
 build glad: phony libs/external_libs/glad/libglad.a
 
 build glfw: phony libs/external_libs/glfw-3.4/src/libglfw3.a
@@ -1718,13 +1672,17 @@ build libgtest.a: phony lib/libgtest.a
 
 build libgtest_main.a: phony lib/libgtest_main.a
 
-build libmylib.a: phony libs/internal_libs/mylib/libmylib.a
+build libshaders.a: phony libs/internal_libs/shaders/libshaders.a
 
 build my_game: phony apps/my_game.exe
 
 build my_game.exe: phony apps/my_game.exe
 
-build mylib: phony libs/internal_libs/mylib/libmylib.a
+build shaders: phony libs/internal_libs/shaders/libshaders.a
+
+build shadersTest: phony libs/internal_libs/shaders/test/shadersTest.exe
+
+build shadersTest.exe: phony libs/internal_libs/shaders/test/shadersTest.exe
 
 build uninstall: phony libs/external_libs/glfw-3.4/uninstall
 
@@ -1815,21 +1773,21 @@ build libs/external_libs/googletest/googletest/all: phony lib/libgtest.a lib/lib
 #############################################
 # Folder: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs
 
-build libs/internal_libs/all: phony libs/internal_libs/mylib/all
+build libs/internal_libs/all: phony libs/internal_libs/shaders/all
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib
+# Folder: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/shaders
 
-build libs/internal_libs/mylib/all: phony libs/internal_libs/mylib/libmylib.a libs/internal_libs/mylib/test/all
+build libs/internal_libs/shaders/all: phony libs/internal_libs/shaders/libshaders.a libs/internal_libs/shaders/test/all
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test
+# Folder: C:/Users/Zaidi/OneDrive - Higher Education Commission/Documents/course books/internship-arc/opengl-game/build/libs/internal_libs/shaders/test
 
-build libs/internal_libs/mylib/test/all: phony libs/internal_libs/mylib/test/TestA.exe libs/internal_libs/mylib/test/TestB.exe
+build libs/internal_libs/shaders/test/all: phony libs/internal_libs/shaders/test/shadersTest.exe
 
 # =============================================================================
 # Built-in targets
@@ -1838,14 +1796,14 @@ build libs/internal_libs/mylib/test/all: phony libs/internal_libs/mylib/test/Tes
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/mylib/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glad/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/src/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/docs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googlemock/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googletest/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/apps/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/mylib/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/mylib/test/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glad/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/src/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/docs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googlemock/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googletest/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/apps/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/apps/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glad/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/cmake_uninstall.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/docs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/src/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/internal_utils.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/test/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDependentOption.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakePackageConfigHelpers.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckIncludeFile.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckLibraryExists.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindDoxygen.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/FindThreads.cmake C$:/msys64/mingw64/share/cmake/Modules/GNUInstallDirs.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/4.0.2/CMakeCCompiler.cmake CMakeFiles/4.0.2/CMakeCXXCompiler.cmake CMakeFiles/4.0.2/CMakeRCCompiler.cmake CMakeFiles/4.0.2/CMakeSystem.cmake
+build build.ninja C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/shaders/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/shaders/test/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glad/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/src/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/docs/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googlemock/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googletest/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/apps/cmake_install.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/shaders/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/internal_libs/shaders/test/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glad/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/src/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/glfw-3.4/docs/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googlemock/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/libs/external_libs/googletest/googletest/CTestTestfile.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/build/apps/CTestTestfile.cmake: RERUN_CMAKE | C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/apps/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glad/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/cmake_uninstall.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/docs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/src/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/internal_utils.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/test/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDependentOption.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakePackageConfigHelpers.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckIncludeFile.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckLibraryExists.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindDoxygen.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/FindThreads.cmake C$:/msys64/mingw64/share/cmake/Modules/GNUInstallDirs.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/4.0.2/CMakeCCompiler.cmake CMakeFiles/4.0.2/CMakeCXXCompiler.cmake CMakeFiles/4.0.2/CMakeRCCompiler.cmake CMakeFiles/4.0.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/apps/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glad/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/cmake_uninstall.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/docs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/src/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/internal_utils.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/mylib/test/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDependentOption.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakePackageConfigHelpers.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckIncludeFile.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckLibraryExists.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindDoxygen.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/FindThreads.cmake C$:/msys64/mingw64/share/cmake/Modules/GNUInstallDirs.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/4.0.2/CMakeCCompiler.cmake CMakeFiles/4.0.2/CMakeCXXCompiler.cmake CMakeFiles/4.0.2/CMakeRCCompiler.cmake CMakeFiles/4.0.2/CMakeSystem.cmake: phony
+build C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/apps/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glad/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/cmake_uninstall.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/CMake/glfw3Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/docs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/glfw-3.4/src/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googlemock/cmake/gmock_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/Config.cmake.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/gtest_main.pc.in C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/external_libs/googletest/googletest/cmake/internal_utils.cmake C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/CMakeLists.txt C$:/Users/Zaidi/OneDrive$ -$ Higher$ Education$ Commission/Documents/course$ books/internship-arc/opengl-game/libs/internal_libs/shaders/test/CMakeLists.txt C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/msys64/mingw64/share/cmake/Modules/CMakeCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCXXInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeCommonLanguageInclude.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeDependentOption.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeGenericSystem.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeInitializeConfigs.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeLanguageInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakePackageConfigHelpers.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeRCInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckCSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckIncludeFile.cmake C$:/msys64/mingw64/share/cmake/Modules/CheckLibraryExists.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Compiler/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/FindDoxygen.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageHandleStandardArgs.cmake C$:/msys64/mingw64/share/cmake/Modules/FindPackageMessage.cmake C$:/msys64/mingw64/share/cmake/Modules/FindThreads.cmake C$:/msys64/mingw64/share/cmake/Modules/GNUInstallDirs.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake C$:/msys64/mingw64/share/cmake/Modules/Internal/CheckSourceCompiles.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Linker/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-C.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU-CXX.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-GNU.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-Initialize.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows-windres.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/Windows.cmake C$:/msys64/mingw64/share/cmake/Modules/Platform/WindowsPaths.cmake C$:/msys64/mingw64/share/cmake/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/4.0.2/CMakeCCompiler.cmake CMakeFiles/4.0.2/CMakeCXXCompiler.cmake CMakeFiles/4.0.2/CMakeRCCompiler.cmake CMakeFiles/4.0.2/CMakeSystem.cmake: phony
 
 
 #############################################
