@@ -12,6 +12,7 @@ class Shader {
   // constructor reads and builds the shader
   Shader(const char *vertexPath, const char *fragmentPath);
   // use/activate the shader
+  ~Shader();
   void use();
   // utility uniform functions
   void setBool(const std::string &name, bool value) const;
