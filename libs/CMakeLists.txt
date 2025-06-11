@@ -1,0 +1,2 @@
+add_subdirectory(internal_libs)
+add_subdirectory(external_libs)
