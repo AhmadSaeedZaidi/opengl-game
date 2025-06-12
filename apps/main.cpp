@@ -4,7 +4,7 @@
 #include <render.h>
 #include <rectangle.h>
 #include <textures.h>
-#include <shape.h>
+
 int main() {
   auto window = std::make_unique<RenderWindow>(800, 600, "LearnOpenGL", "shaders/basic.vert",
                                                "shaders/basic.frag");

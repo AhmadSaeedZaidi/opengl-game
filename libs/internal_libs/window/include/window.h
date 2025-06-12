@@ -18,6 +18,7 @@ class WindowApp {
   virtual void processInput();
   GLFWwindow* window;
   int height, width;
+  const char* title;
 };
 
 #endif

@@ -3,28 +3,8 @@
 #include <glad/glad.h>
 #include <iostream>
 
-WindowApp::WindowApp(int width, int height, const char* title) : width(width), height(height) {
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-
-  if (window == nullptr) {
-    std::cout << "Failed to create GLFW window" << std::endl;
-    glfwTerminate();
-    return;
-  }
-
-  glfwMakeContextCurrent(window);
-
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-    std::cout << "Failed to initialize GLAD" << std::endl;
-    return;
-  }
-
-  glViewport(0, 0, width, height);
-}
+WindowApp::WindowApp(int width, int height, const char* title)
+    : width(width), height(height), title(title) {}
 
 WindowApp::~WindowApp() {
   glfwDestroyWindow(window);
@@ -32,14 +12,23 @@ WindowApp::~WindowApp() {
 }
 
 void WindowApp::run() {
+  std::cout << "[run] starting…\n";
   init();  // call the init method to set up the window and OpenGL context
+
+  if (!window) {
+    std::cout << "Window initialization failed\n";
+    return;
+  }
   while (!glfwWindowShouldClose(window)) {
     processInput();
     render();
     update();
     glfwSwapBuffers(window);
     glfwPollEvents();
+    std::cout << "[run] loop\n";
   }
+  glfwDestroyWindow(window);
+  glfwTerminate();
 }
 
 void WindowApp::render() {
@@ -59,5 +48,28 @@ void WindowApp::update() {
 }
 
 void WindowApp::init() {
-  // default: do nothing
+  if (!glfwInit()) {
+    std::cout << "Failed to initialize GLFW\n";
+    return;
+  }
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+  window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+  if (!window) {
+    std::cout << "Failed to create GLFW window\n";
+    glfwTerminate();
+    return;
+  }
+  glfwMakeContextCurrent(window);
+
+  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    std::cout << "Failed to initialize GLAD\n";
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return;
+  }
+
+  glViewport(0, 0, width, height);
 }
