@@ -1,6 +1,7 @@
 #include "window.h"
 #include <glfw/glfw3.h>
 #include <glad/glad.h>
+#include <iostream>
 
 WindowApp::WindowApp(int width, int height, const char* title) : width(width), height(height) {
   glfwInit();

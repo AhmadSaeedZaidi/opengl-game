@@ -4,8 +4,6 @@
 #include <glfw/glfw3.h>
 #include <string>
 #include <fstream>
-#include <sstream>
-#include <iostream>
 
 class WindowApp {
  public:
