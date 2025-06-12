@@ -2,7 +2,13 @@
 #include <glad/glad.h>
 #include <stb_image.h>
 #include <iostream>
-#include <cstring>
+
+static void setupParams() {
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
 
 Textures::Textures(int width, int height, int nrChannels, const char* texturePath)
     : width(width), height(height), nrChannels(nrChannels), texturePath(texturePath) {
@@ -10,32 +16,56 @@ Textures::Textures(int width, int height, int nrChannels, const char* texturePat
 }
 unsigned int Textures::getTexture() const { return texture; }
 
-unsigned int Textures::loadTextureRegion(const char* filePath, int X, int Y, int W, int H) {
-  int imgW, imgH, channels;
-  unsigned char* data = stbi_load(filePath, &imgW, &imgH, &channels, 0);
-  if (!data) throw std::runtime_error("Failed to load image");
-
-  // Allocate buffer for the sub-image
-  size_t rowSize = size_t(W) * channels;
-  auto region = new unsigned char[size_t(H) * rowSize];
-
-  // Copy each scanline
-  for (int y = 0; y < H; ++y) {
-    unsigned char* src = data + ((Y + y) * imgW + X) * channels;
-    unsigned char* dst = region + size_t(y) * rowSize;
-    std::memcpy(dst, src, rowSize);
+// Load an entire image as a GL texture.
+// Returns 0 on failure, or a valid texture ID.
+unsigned int Textures::loadTexture(const char* filePath, int& outW, int& outH, int& outChannels) {
+  unsigned char* data = stbi_load(filePath, &outW, &outH, &outChannels, 0);
+  if (!data) {
+    std::cerr << "ERROR: Failed to load '" << filePath << "'\n";
+    return 0;
   }
-  stbi_image_free(data);
-
-  // Upload to GL
+  GLenum fmt = (outChannels == 4 ? GL_RGBA : GL_RGB);
   GLuint texID;
   glGenTextures(1, &texID);
   glBindTexture(GL_TEXTURE_2D, texID);
+  setupParams();
+  glTexImage2D(GL_TEXTURE_2D, 0, fmt, outW, outH, 0, fmt, GL_UNSIGNED_BYTE, data);
+  glGenerateMipmap(GL_TEXTURE_2D);
+  stbi_image_free(data);
+  return texID;
+}
+
+// Load a sub‐rectangle [x,y,w,h] out of an image file.
+// Returns a new GL texture containing just that region.
+unsigned int Textures::loadTextureRegion(const char* filePath, int x, int y, int w, int h) {
+  int imgW, imgH, channels;
+  unsigned char* data = stbi_load(filePath, &imgW, &imgH, &channels, 0);
+  if (!data) {
+    std::cerr << "ERROR: Failed to load '" << filePath << "'\n";
+    return 0;
+  }
+
   GLenum fmt = (channels == 4 ? GL_RGBA : GL_RGB);
-  glTexImage2D(GL_TEXTURE_2D, 0, fmt, W, H, 0, fmt, GL_UNSIGNED_BYTE, region);
+  GLuint texID = 0;
+  glGenTextures(1, &texID);
+  glBindTexture(GL_TEXTURE_2D, texID);
+  setupParams();
+
+  // Tell GL how to skip rows/pixels so we pull only the sub‐region
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+  glPixelStorei(GL_UNPACK_ROW_LENGTH, imgW);
+  glPixelStorei(GL_UNPACK_SKIP_PIXELS, x);
+  glPixelStorei(GL_UNPACK_SKIP_ROWS, y);
+
+  glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, fmt, GL_UNSIGNED_BYTE, data);
   glGenerateMipmap(GL_TEXTURE_2D);
 
-  delete[] region;
+  // Restore defaults
+  glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+  glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+  glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
+
+  stbi_image_free(data);
   return texID;
 }
 void Textures::init() {

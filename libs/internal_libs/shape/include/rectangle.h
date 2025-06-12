@@ -1,23 +1,28 @@
-#ifndef RECTANGLE
-#define RECTANGLE
-#include <memory>
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
 #include "shape.h"
+#include "textures.h"
 
 class Rectangle : public Shape {
  public:
-  // coords=[Ax,Ay,Bx,By]
-  Rectangle(const float coords[4], const char* texturePath, int X, int Y, int W, int H);
-  ~Rectangle();
+  // coords = { Ax, Ay, Bx, By }
+  // textureFile is now passed in
+  Rectangle(const float coords[4], const char* textureFile);
+  ~Rectangle() override;
 
   void init() override;
   void draw() override;
 
-  void setTexture(std::shared_ptr<Textures> tex) override;
-
  private:
-  unsigned int VAO = 0, VBO = 0, EBO = 0;
+  // Vertex array / buffer objects
+  GLuint VAO = 0, VBO = 0, EBO = 0;
+  // The GL texture ID
+  GLuint texID = 0;
+
+  // Rectangle corner coordinates
   float Ax, Ay, Bx, By;
-  bool hasTexture = false;
+  const char* texPath;  // <- new
 };
 
-#endif
+#endif  // RECTANGLE_H

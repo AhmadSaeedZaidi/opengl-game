@@ -10,12 +10,11 @@ int main() {
                                                "shaders/basic.frag");
 
   float board_coords[] = {
-      // x,   y
-      0.5f, 0.1f,  // Top-right
-      -0.5f, 0.0f  // Bottom-left
+      -0.2f, -0.95f,  // bottom-left
+      0.2f, -0.8f     // top-right
   };
-  window->addShape(
-      std::make_unique<Rectangle>(board_coords, "textures/breakout.png", 0, 336, 64, 16));
+  auto s = std::make_unique<Rectangle>(board_coords, "textures/board.png");
+  window->addShape(std::move(s));
   window->run();  // run the window application
   return 0;
 }

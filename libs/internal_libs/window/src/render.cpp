@@ -14,10 +14,8 @@ void RenderWindow::update() {
 }
 
 void RenderWindow::init() {
-  std::cout << "Test" << std::endl;
   WindowApp::init();  // call the base class init method
   Shader::use();
-  std::cout << "Test 2" << std::endl;
   Shader::setInt("ourTexture", 0);
   for (auto& s : shapes) s->init();
 }
