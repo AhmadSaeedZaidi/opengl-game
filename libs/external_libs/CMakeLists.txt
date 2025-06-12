@@ -1,3 +1,4 @@
 add_subdirectory(glad)
 add_subdirectory(glfw-3.4)
 add_subdirectory(googletest)
+add_subdirectory(stb_image)

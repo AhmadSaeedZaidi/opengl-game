@@ -4,8 +4,6 @@
 #include <glfw/glfw3.h>
 #include <string>
 #include <fstream>
-#include <sstream>
-#include <iostream>
 
 class WindowApp {
  public:
@@ -20,6 +18,7 @@ class WindowApp {
   virtual void processInput();
   GLFWwindow* window;
   int height, width;
+  const char* title;
 };
 
 #endif
