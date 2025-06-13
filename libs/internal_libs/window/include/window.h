@@ -13,7 +13,7 @@ class WindowApp {
 
  protected:
   virtual void render();
-  virtual void update();
+  virtual void update(float deltaTime);
   virtual void init();
   virtual void processInput();
   GLFWwindow* window;

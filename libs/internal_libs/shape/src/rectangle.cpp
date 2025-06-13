@@ -1,5 +1,8 @@
 #include "rectangle.h"
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 Rectangle::Rectangle(const float coords[4], const char* textureFile)
     : Ax(coords[0]), Ay(coords[1]), Bx(coords[2]), By(coords[3]), texPath(textureFile) {}
@@ -52,11 +55,15 @@ void Rectangle::init() {
   glBindVertexArray(0);
 }
 
-void Rectangle::draw() {
+void Rectangle::draw(GLuint shaderID, float deltaTime) {
   if (texID) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texID);
   }
+
+  unsigned int transformLoc = glGetUniformLocation(shaderID, "transform");
+  glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
   glBindVertexArray(VAO);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
   glBindVertexArray(0);

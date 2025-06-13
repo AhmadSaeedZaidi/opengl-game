@@ -43,13 +43,17 @@ void WindowApp::run() {
     std::cout << "Window initialization failed\n";
     return;
   }
+  double last = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
+    double now = glfwGetTime();
+    float delta = float(now - last);
+    last = now;
     processInput();
     render();
-    update();
+    update(delta);
     glfwSwapBuffers(window);
-    glfwPollEvents();
-  }
+    }
   glfwDestroyWindow(window);
   glfwTerminate();
 }
@@ -66,7 +70,7 @@ void WindowApp::processInput() {
   }
 }
 
-void WindowApp::update() {
+void WindowApp::update(float deltaTime) {
   // default: do nothing
 }
 
