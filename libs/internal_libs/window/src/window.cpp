@@ -53,14 +53,14 @@ void WindowApp::run() {
     render();
     update(delta);
     glfwSwapBuffers(window);
-    }
+  }
   glfwDestroyWindow(window);
   glfwTerminate();
 }
 
 void WindowApp::render() {
   // default: clear screen
-  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+  glClearColor(0.247f, 0.2824f, 0.8f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
