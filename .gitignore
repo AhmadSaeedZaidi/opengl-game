@@ -55,3 +55,12 @@ Thumbs.db
 # Project specific
 /shaders/temp_*.glsl
 *.log
+#GLM stuff i don't need:
+
+libs/external_libs/glm-1.0.1/doc
+libs/external_libs/glm-1.0.1/test
+libs/external_libs/glm-1.0.1/.github
+libs/external_libs/glm-1.0.1/.gitignore
+libs/external_libs/glm-1.0.1/readme.md
+libs/external_libs/glm-1.0.1/manual.md
+libs/external_libs/glm-1.0.1/copying.txt

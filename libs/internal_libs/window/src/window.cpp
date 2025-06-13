@@ -43,12 +43,16 @@ void WindowApp::run() {
     std::cout << "Window initialization failed\n";
     return;
   }
+  double last = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
+    glfwPollEvents();
+    double now = glfwGetTime();
+    float delta = float(now - last);
+    last = now;
     processInput();
     render();
-    update();
+    update(delta);
     glfwSwapBuffers(window);
-    glfwPollEvents();
   }
   glfwDestroyWindow(window);
   glfwTerminate();
@@ -56,7 +60,7 @@ void WindowApp::run() {
 
 void WindowApp::render() {
   // default: clear screen
-  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+  glClearColor(0.247f, 0.2824f, 0.8f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
@@ -66,7 +70,7 @@ void WindowApp::processInput() {
   }
 }
 
-void WindowApp::update() {
+void WindowApp::update(float deltaTime) {
   // default: do nothing
 }
 

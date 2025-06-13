@@ -3,6 +3,9 @@
 
 #include "shape.h"
 #include "textures.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Rectangle : public Shape {
  public:
@@ -12,7 +15,10 @@ class Rectangle : public Shape {
   ~Rectangle() override;
 
   void init() override;
-  void draw() override;
+  void draw(GLuint ShaderID, float deltaTime) override;
+
+ protected:
+  glm::mat4 trans = glm::mat4(1.0f);
 
  private:
   // Vertex array / buffer objects
@@ -22,7 +28,7 @@ class Rectangle : public Shape {
 
   // Rectangle corner coordinates
   float Ax, Ay, Bx, By;
-  const char* texPath;  // <- new
+  const char* texPath;
 };
 
 #endif  // RECTANGLE_H
