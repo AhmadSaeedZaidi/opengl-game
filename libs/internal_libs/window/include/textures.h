@@ -16,7 +16,7 @@ class Textures {
 
   // Load just the sub‐rectangle [x,y,w,h] out of an image file.
   // Returns a new GL texture ID (0 on failure).
-  static unsigned int loadTextureRegion(const char* filePath, int x, int y, int w, int h);
+  static unsigned int loadTextureRegion(const char* filePath, int& outW, int& outH, int& outChannels, int x, int y, int w, int h);
   unsigned int getTexture() const;
 
  protected:

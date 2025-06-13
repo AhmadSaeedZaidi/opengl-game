@@ -4,11 +4,12 @@
 
 // 1) define your coords once
 static constexpr float board_coords[4] = {
-    -0.2f, -0.95f,  // bottom-left
-    0.2f, -0.8f     // top-right
+    -0.16f, -0.95f,  // bottom-left
+    0.16f, -0.85f    // top-right
+                     // texture has ratio 1:3.2, so coords are set accordingly
 };
 
-Board::Board() : Rectangle(board_coords, "textures/board.png") {}
+Board::Board() : Rectangle(board_coords, "textures/atlas.png", 8, 151, 64, 20) {}
 void Board::draw(GLuint ShaderID, float deltaTime) {
   if (!ShaderID) {
     std::cerr << "ERROR: Shader ID is not set for Board::draw\n";

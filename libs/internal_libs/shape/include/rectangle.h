@@ -11,7 +11,7 @@ class Rectangle : public Shape {
  public:
   // coords = { Ax, Ay, Bx, By }
   // textureFile is now passed in
-  Rectangle(const float coords[4], const char* textureFile);
+  Rectangle(const float coords[4], const char* textureFile, int x, int y, int w, int h);
   ~Rectangle() override;
 
   void init() override;
@@ -28,6 +28,8 @@ class Rectangle : public Shape {
 
   // Rectangle corner coordinates
   float Ax, Ay, Bx, By;
+  // Texture coordinates in the atlas
+  int x, y, w, h;
   const char* texPath;
 };
 

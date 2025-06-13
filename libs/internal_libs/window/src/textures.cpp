@@ -37,35 +37,44 @@ unsigned int Textures::loadTexture(const char* filePath, int& outW, int& outH, i
 
 // Load a sub‐rectangle [x,y,w,h] out of an image file.
 // Returns a new GL texture containing just that region.
-unsigned int Textures::loadTextureRegion(const char* filePath, int x, int y, int w, int h) {
-  int imgW, imgH, channels;
-  unsigned char* data = stbi_load(filePath, &imgW, &imgH, &channels, 0);
+unsigned int Textures::loadTextureRegion(const char* filePath, int& outW, int& outH,
+                                         int& outChannels, int x, int y, int w, int h) {
+  // 1) load the full image
+  unsigned char* data = stbi_load(filePath, &outW, &outH, &outChannels, 0);
   if (!data) {
     std::cerr << "ERROR: Failed to load '" << filePath << "'\n";
     return 0;
   }
 
-  GLenum fmt = (channels == 4 ? GL_RGBA : GL_RGB);
-  GLuint texID = 0;
+  // 2) bounds check
+  if (x < 0 || y < 0 || x + w > outW || y + h > outH) {
+    std::cerr << "ERROR: Region out of bounds\n";
+    stbi_image_free(data);
+    return 0;
+  }
+
+  // 3) extract sub-image
+  int C = outChannels;
+  unsigned char* sub = new unsigned char[w * h * C];
+  for (int row = 0; row < h; ++row) {
+    unsigned char* dst = sub + row * w * C;
+    unsigned char* src = data + ((y + row) * outW + x) * C;
+    memcpy(dst, src, w * C);
+  }
+
+  // 4) upload as GL texture
+  GLenum fmt = (C == 4 ? GL_RGBA : GL_RGB);
+  GLuint texID;
   glGenTextures(1, &texID);
   glBindTexture(GL_TEXTURE_2D, texID);
   setupParams();
-
-  // Tell GL how to skip rows/pixels so we pull only the sub‐region
-  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-  glPixelStorei(GL_UNPACK_ROW_LENGTH, imgW);
-  glPixelStorei(GL_UNPACK_SKIP_PIXELS, x);
-  glPixelStorei(GL_UNPACK_SKIP_ROWS, y);
-
-  glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, fmt, GL_UNSIGNED_BYTE, data);
+  glTexImage2D(GL_TEXTURE_2D, 0, fmt, w, h, 0, fmt, GL_UNSIGNED_BYTE, sub);
   glGenerateMipmap(GL_TEXTURE_2D);
 
-  // Restore defaults
-  glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-  glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
-  glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
-
+  // 5) clean up
+  delete[] sub;
   stbi_image_free(data);
+
   return texID;
 }
 void Textures::init() {

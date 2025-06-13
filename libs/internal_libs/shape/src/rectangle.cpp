@@ -4,8 +4,16 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Rectangle::Rectangle(const float coords[4], const char* textureFile)
-    : Ax(coords[0]), Ay(coords[1]), Bx(coords[2]), By(coords[3]), texPath(textureFile) {}
+Rectangle::Rectangle(const float coords[4], const char* textureFile, int x, int y, int w, int h)
+    : Ax(coords[0]),
+      Ay(coords[1]),
+      Bx(coords[2]),
+      By(coords[3]),
+      texPath(textureFile),
+      x(x),
+      y(y),
+      w(w),
+      h(h) {}
 
 Rectangle::~Rectangle() {
   glDeleteVertexArrays(1, &VAO);
@@ -15,8 +23,8 @@ Rectangle::~Rectangle() {
 }
 
 void Rectangle::init() {
-  int w, h, ch;
-  texID = Textures::loadTexture(texPath, w, h, ch);
+  int w_, h_, ch;
+  texID = Textures::loadTextureRegion(texPath, w_, h_, ch, x, y, w, h);
   if (!texID) {
     std::cerr << "Rectangle::init() failed to load '" << texPath << "'\n";
     return;

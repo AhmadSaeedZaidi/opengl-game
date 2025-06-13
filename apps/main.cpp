@@ -2,8 +2,6 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <render.h>
-#include <rectangle.h>
-#include <textures.h>
 #include <board.h>
 
 int main() {
