@@ -1,8 +1,8 @@
 #ifndef CUBOID
 #define CUBOID
 
-#include <shape.h>     // ✅ Simple include - CMake handles the path
-#include <textures.h>  // ✅ Simple include - CMake handles the path
+#include <shape.h>    
+#include <textures.h>  
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
