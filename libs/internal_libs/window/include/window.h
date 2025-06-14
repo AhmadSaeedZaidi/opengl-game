@@ -12,7 +12,7 @@ class WindowApp {
   void run();
 
  protected:
-  virtual void render();
+  virtual void render(float deltaTime);
   virtual void update(float deltaTime);
   virtual void init();
   virtual void processInput();

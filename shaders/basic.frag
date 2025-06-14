@@ -1,8 +1,30 @@
 #version 330 core
-out vec4 FragColor;
-in vec3 ourColor;
+
 in vec2 TexCoord;
-uniform sampler2D ourTexture;
-void main() {
-    FragColor = texture(ourTexture, TexCoord) * vec4(ourColor, 1.0);
+in float TexID;
+
+out vec4 FragColor;
+
+uniform sampler2D sidesTexture;
+uniform sampler2D capsTexture;
+uniform bool hasSidesTexture;
+uniform bool hasCapsTexture;
+
+void main()
+{
+    vec4 texColor = vec4(1.0, 1.0, 1.0, 1.0);
+    
+    if (TexID < 0.5) {
+        // Side faces
+        if (hasSidesTexture) {
+            texColor = texture(sidesTexture, TexCoord);
+        }
+    } else {
+        // Cap faces
+        if (hasCapsTexture) {
+            texColor = texture(capsTexture, TexCoord);
+        }
+    }
+    
+    FragColor = texColor;
 }

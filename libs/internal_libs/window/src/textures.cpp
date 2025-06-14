@@ -1,5 +1,6 @@
 #include "textures.h"
 #include <glad/glad.h>
+#include <stb_image_write.h>
 #include <stb_image.h>
 #include <iostream>
 
@@ -39,12 +40,19 @@ unsigned int Textures::loadTexture(const char* filePath, int& outW, int& outH, i
 // Returns a new GL texture containing just that region.
 unsigned int Textures::loadTextureRegion(const char* filePath, int& outW, int& outH,
                                          int& outChannels, int x, int y, int w, int h) {
+  std::cout << "=== TEXTURE REGION DEBUG ===" << std::endl;
+  std::cout << "Loading from: '" << filePath << "'" << std::endl;
+  std::cout << "Requested region: x=" << x << ", y=" << y << ", w=" << w << ", h=" << h
+            << std::endl;
+
   // 1) load the full image
   unsigned char* data = stbi_load(filePath, &outW, &outH, &outChannels, 0);
   if (!data) {
     std::cerr << "ERROR: Failed to load '" << filePath << "'\n";
     return 0;
   }
+  std::cout << "✓ Image loaded: " << outW << "x" << outH << ", channels: " << outChannels
+            << std::endl;
 
   // 2) bounds check
   if (x < 0 || y < 0 || x + w > outW || y + h > outH) {
@@ -61,6 +69,16 @@ unsigned int Textures::loadTextureRegion(const char* filePath, int& outW, int& o
     unsigned char* src = data + ((y + row) * outW + x) * C;
     memcpy(dst, src, w * C);
   }
+  std::cout << "✓ Region extracted (" << w * h * C << " bytes)" << std::endl;
+
+  // 4) DEBUG: Save extracted region to file
+  std::string debugPath = "textures/debug_" + std::to_string(x) + "_" + std::to_string(y) + "_" +
+                          std::to_string(w) + "x" + std::to_string(h) + ".png";
+  if (stbi_write_png(debugPath.c_str(), w, h, C, sub, w * C)) {
+    std::cout << "✓ Debug region saved to: " << debugPath << std::endl;
+  } else {
+    std::cout << "⚠ Failed to save debug region to: " << debugPath << std::endl;
+  }
 
   // 4) upload as GL texture
   GLenum fmt = (C == 4 ? GL_RGBA : GL_RGB);
@@ -74,7 +92,7 @@ unsigned int Textures::loadTextureRegion(const char* filePath, int& outW, int& o
   // 5) clean up
   delete[] sub;
   stbi_image_free(data);
-
+  std::cout << "=========================" << std::endl;
   return texID;
 }
 void Textures::init() {

@@ -1,7 +1,10 @@
-#include <glad/glad.h>
-#include <render.h>
-#include <iostream>
-
+#include "render.h"
+#include "window.h"
+#include "textures.h"
+#include <shaders.h>
+#include <shape.h>
+#include <vector>
+#include <memory>
 
 RenderWindow::RenderWindow(int width, int height, const char* title, const char* vS,
                            const char* fS)

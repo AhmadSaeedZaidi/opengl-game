@@ -18,8 +18,9 @@ class RenderWindow : public WindowApp, public Shader {
   void addShape(std::unique_ptr<Shape> s);
 
  protected:
-  void update(float deltaTime) override;  // override the update method to render the rectangle
-  void init() override;    // override the init method to set up OpenGL buffers
+  void update(float deltaTime) override;
+  void render(float deltaTime) override;  // override the update method to render the rectangle
+  void init() override;                   // override the init method to set up OpenGL buffers
  private:
   std::vector<std::unique_ptr<Shape>> shapes;
 };
