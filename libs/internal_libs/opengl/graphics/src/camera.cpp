@@ -63,11 +63,11 @@ void OpenGL::Graphics::OrbitCamera::reset() {
 
 void OpenGL::Graphics::OrbitCamera::updatePosition() {
   // Convert spherical coordinates to Cartesian
-  float x = distance_ * cos(glm::radians(pitch_)) * cos(glm::radians(yaw_));
+  float x = distance_ * cos(glm::radians(pitch_)) * sin(glm::radians(yaw_));
   float y = distance_ * sin(glm::radians(pitch_));
-  float z = distance_ * cos(glm::radians(pitch_)) * sin(glm::radians(yaw_));
+  float z = distance_ * cos(glm::radians(pitch_)) * cos(glm::radians(yaw_)); 
 
-  // Position camera in positive Z direction by default (when yaw=0, pitch=0)
+  // Now when yaw=0, pitch=0: camera at (0, 0, distance_) = ON Z-AXIS! ✅
   position_ = glm::vec3(x, y, z);
 }
 

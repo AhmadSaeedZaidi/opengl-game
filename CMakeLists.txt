@@ -2,6 +2,21 @@
 cmake_minimum_required(VERSION 3.16)  # Bumped for better C++17 support
 project(OpenGLProject)
 
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    # Check if we're using MinGW and set proper environment
+    if(MINGW)
+        set(ENV{CCACHE_CC} "gcc")
+        set(ENV{CCACHE_CXX} "g++")
+    endif()
+    
+    set(CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    message(STATUS "ccache found and configured: ${CCACHE_PROGRAM}")
+else()
+    message(STATUS "ccache not found")
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

@@ -58,7 +58,7 @@ void OpenGL::Core::WindowApp::run() {
 
 void OpenGL::Core::WindowApp::render(float deltaTime) {
   // default: clear screen
-  glClearColor(0.247f, 0.2824f, 0.8f, 1.0f);
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT);
 }
 
