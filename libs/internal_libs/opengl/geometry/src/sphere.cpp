@@ -140,14 +140,23 @@ void OpenGL::Geometry::Sphere::draw(GLuint shaderID, float deltaTime) {
   glUniformMatrix4fv(glGetUniformLocation(shaderID, "model"), 1, GL_FALSE,
                      glm::value_ptr(getModelMatrix()));
 
-  // Bind texture if available
+  // Bind the same texture to slots 0 and 1
   if (textureID) {
+    // Bind to slot 0 (sidesTexture)
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glUniform1i(glGetUniformLocation(shaderID, "sphereTexture"), 0);
-    glUniform1i(glGetUniformLocation(shaderID, "hasTexture"), 1);
+    glUniform1i(glGetUniformLocation(shaderID, "sidesTexture"), 0);
+
+    // Bind to slot 1 (capsTexture) - SAME texture
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glUniform1i(glGetUniformLocation(shaderID, "capsTexture"), 1);
+
+    glUniform1i(glGetUniformLocation(shaderID, "hasSidesTexture"), 1);
+    glUniform1i(glGetUniformLocation(shaderID, "hasCapsTexture"), 1);
   } else {
-    glUniform1i(glGetUniformLocation(shaderID, "hasTexture"), 0);
+    glUniform1i(glGetUniformLocation(shaderID, "hasSidesTexture"), 0);
+    glUniform1i(glGetUniformLocation(shaderID, "hasCapsTexture"), 0);
   }
 
   // Draw the sphere

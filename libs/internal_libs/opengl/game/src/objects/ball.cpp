@@ -6,10 +6,10 @@
 
 OpenGL::Game::Objects::Ball::Ball(const glm::vec3& position, float radius)
     : OpenGL::Geometry::Sphere(position, radius,
-                               "textures/atlas.png",  // atlas file
-                               384, 512, 384, 512,    // ball texture region
-                               16, 32),               // latitude, longitude segments
-      velocity2D_(1.0f, 2.0f),                        // Start with some velocity
+                               "textures/atlas.png",                // atlas file
+                               384 / 4, 512 / 4, 384 / 4, 512 / 4,  // ball texture region
+                               8, 8),                               // latitude, longitude segments
+      velocity2D_(1.0f, 2.0f),                                      // Start with some velocity
       radius_(radius),
       startPosition_(position) {  // Store start position
   std::cout << "Ball Created at position: " << position.x << ", " << position.y << ", "
@@ -18,7 +18,7 @@ OpenGL::Game::Objects::Ball::Ball(const glm::vec3& position, float radius)
 
 void OpenGL::Game::Objects::Ball::update(float deltaTime) {
   // Apply gravity (only in Y direction)
-  velocity2D_.y += GRAVITY_2D * deltaTime;
+  // velocity2D_.y += GRAVITY_2D * deltaTime;
 
   // Limit speed to prevent crazy physics
   float speed = sqrt(velocity2D_.x * velocity2D_.x + velocity2D_.y * velocity2D_.y);

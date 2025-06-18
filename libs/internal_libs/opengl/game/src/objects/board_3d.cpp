@@ -8,12 +8,13 @@ OpenGL::Game::Objects::Board3D::Board3D()
           BOARD_HEIGHT * 0.5f,           // radius = half the height for thin cylinder
           BOARD_WIDTH,                   // height (length) = board width
           "textures/atlas.png",          // atlas file
-          0, 0, 384, 512,                // sides texture region (rotated 90°)
-          0, 512, 384, 512,              // caps texture region (end caps)
-          16)                            // 16 segments for smoothness
+          0, 0, 384 / 4, 512 / 4,        // sides texture region (rotated 90°)
+          0, 512 / 4, 384 / 4, 512 / 4,  // caps texture region (end caps)
+          16),                           // 16 segments for smoothness
+      currentSpeed_(speed_),             // Initialize current speed
+      paddleHits_(0)                     // Initialize hit counter
 {
-  std::cout << "Board3D Created (Cylinder) - Width:" << BOARD_WIDTH << " Height:" << BOARD_HEIGHT
-            << std::endl;
+  std::cout << "Board3D Created - Initial Speed: " << currentSpeed_ << std::endl;
 }
 
 void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime) {
@@ -27,10 +28,10 @@ void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime) {
   float movement = 0.0f;
 
   if (glfwGetKey(w, GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(w, GLFW_KEY_A) == GLFW_PRESS) {
-    movement = -speed_ * deltaTime;
+    movement = -currentSpeed_ * deltaTime;  // Use currentSpeed_ instead of speed_
   }
   if (glfwGetKey(w, GLFW_KEY_RIGHT) == GLFW_PRESS || glfwGetKey(w, GLFW_KEY_D) == GLFW_PRESS) {
-    movement = +speed_ * deltaTime;
+    movement = +currentSpeed_ * deltaTime;  // Use currentSpeed_ instead of speed_
   }
 
   // 2) Apply movement if any key was pressed
@@ -53,6 +54,18 @@ void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime) {
 
   // 3) Call parent's draw method
   OpenGL::Geometry::Cylinder::draw(ShaderID, deltaTime);
+}
+
+void OpenGL::Game::Objects::Board3D::onBallHit() {
+  paddleHits_++;
+  currentSpeed_ = std::min(speed_ + (paddleHits_ * SPEED_BOOST_PER_HIT), MAX_SPEED);
+  std::cout << "Paddle hit #" << paddleHits_ << "! Speed now: " << currentSpeed_ << std::endl;
+}
+
+void OpenGL::Game::Objects::Board3D::resetSpeed() {
+  paddleHits_ = 0;
+  currentSpeed_ = speed_;
+  std::cout << "Paddle speed reset to: " << currentSpeed_ << std::endl;
 }
 
 // Collision support method for managers

@@ -7,9 +7,10 @@ OpenGL::Game::Objects::Brick::Brick(const glm::vec3& position, const glm::vec3& 
                                  BRICK_HEIGHT / 2.0f,   // radius (half height for thin cylinder)
                                  BRICK_WIDTH,           // length along X-axis
                                  "textures/atlas.png",  // atlas file
-                                 768, 512, 384, 512,    // sides texture region (brick pattern)
-                                 768, 0, 384, 512,      // caps texture region (brick ends)
-                                 8),                    // 8 segments (sufficient for brick)
+                                 768 / 4, 512 / 4, 384 / 4,
+                                 512 / 4,  // sides texture region (brick pattern)
+                                 768 / 4, 0, 384 / 4, 512 / 4,  // caps texture region (brick ends)
+                                 8),  // 8 segments (sufficient for brick)
       destroyed_(false),
       color_(color) {
   std::cout << "Brick Created at position: " << position.x << ", " << position.y << ", "

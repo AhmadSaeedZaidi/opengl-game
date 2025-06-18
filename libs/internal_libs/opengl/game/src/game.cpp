@@ -163,31 +163,33 @@ void OpenGL::Game::Game::processInput() {
 }
 
 void OpenGL::Game::Game::processGameInput() {
+  // Static variables need to be at function scope, not inside if-blocks
+  static bool spacePressed = false;
+  static bool pPressed = false;
+
   // Reset game with Space key
   if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-    static bool spacePressed = false;
     if (!spacePressed) {
       resetGame();
       spacePressed = true;
     }
   } else {
-    static bool spacePressed = false;
     spacePressed = false;
   }
 
   // Pause/unpause with P key
   if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
-    static bool pPressed = false;
     if (!pPressed) {
       if (gameState_.isPlaying()) {
         gameState_.setState(Managers::GameState::PAUSED);
+        std::cout << "Game PAUSED" << std::endl;
       } else if (gameState_.getCurrentState() == Managers::GameState::PAUSED) {
         gameState_.setState(Managers::GameState::PLAYING);
+        std::cout << "Game RESUMED" << std::endl;
       }
       pPressed = true;
     }
   } else {
-    static bool pPressed = false;
     pPressed = false;
   }
 }

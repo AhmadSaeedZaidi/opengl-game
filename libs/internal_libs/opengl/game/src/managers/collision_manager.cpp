@@ -64,7 +64,7 @@ void OpenGL::Game::Managers::CollisionManager::checkBallBoardCollisions(Objects:
   if (!ball || !board) return;
 
   Circle2D ballCircle = ball->getCollisionCircle();
-  BoundingBox2D boardBox = board->getCollisionBox();  // Use board's own collision box method
+  BoundingBox2D boardBox = board->getCollisionBox();
 
   if (circleRect(ballCircle, boardBox)) {
     // Boost the ball when it hits the paddle!
@@ -72,16 +72,19 @@ void OpenGL::Game::Managers::CollisionManager::checkBallBoardCollisions(Objects:
     vel.y = std::abs(vel.y);  // Always bounce up
 
     // Add horizontal velocity based on where ball hits paddle
-    float hitOffset = ballCircle.x - boardBox.x;  // -0.5 to 0.5
-    vel.x += hitOffset * BOARD_SPIN_FACTOR;       // Use the constant from header
+    float hitOffset = ballCircle.x - boardBox.x;
+    vel.x += hitOffset * BOARD_SPIN_FACTOR;
 
-    // Apply speed boost to make gameplay more exciting!
+    // Apply speed boost to ball
     float currentSpeed = glm::length(vel);
-    vel =
-        glm::normalize(vel) * (currentSpeed * BOARD_SPEED_BOOST);  // Use the constant from header
+    vel = glm::normalize(vel) * (currentSpeed * BOARD_SPEED_BOOST);
 
     ball->setBounceVelocity(vel);
-    std::cout << "Ball hit paddle! Speed boosted!" << std::endl;
+
+    // BOOST PADDLE SPEED!
+    board->onBallHit();
+
+    std::cout << "Ball hit paddle! Both speeds boosted!" << std::endl;
   }
 }
 

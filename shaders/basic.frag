@@ -7,10 +7,8 @@ out vec4 FragColor;
 
 uniform sampler2D sidesTexture;
 uniform sampler2D capsTexture;
-uniform sampler2D sphereTexture;
 uniform bool hasSidesTexture;
 uniform bool hasCapsTexture;
-uniform bool hasTexture;
 
 void main()
 {
@@ -21,19 +19,12 @@ void main()
         } else {
             FragColor = vec4(0.8, 0.6, 0.4, 1.0); // Brown fallback for sides
         }
-    } else if (TexID < 1.5) {
-        // Cap faces (cylinder)
+    } else {
+        // Cap faces (cylinder) OR Sphere - both use capsTexture now
         if (hasCapsTexture) {
             FragColor = texture(capsTexture, TexCoord);
         } else {
-            FragColor = vec4(0.6, 0.4, 0.2, 1.0); // Darker brown fallback for caps
-        }
-    } else {
-        // Sphere
-        if (hasTexture) {
-            FragColor = texture(sphereTexture, TexCoord);
-        } else {
-            FragColor = vec4(0.7, 0.7, 0.9, 1.0); // Light blue fallback for spheres
+            FragColor = vec4(0.6, 0.4, 0.2, 1.0); // Darker brown fallback
         }
     }
 }
