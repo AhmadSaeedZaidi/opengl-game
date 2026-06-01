@@ -14,7 +14,6 @@ OpenGL::Geometry::Plane::~Plane() {
   if (VAO) glDeleteVertexArrays(1, &VAO);
   if (VBO) glDeleteBuffers(1, &VBO);
   if (EBO) glDeleteBuffers(1, &EBO);
-  if (textureID_) glDeleteTextures(1, &textureID_);
 }
 
 void OpenGL::Geometry::Plane::init() {

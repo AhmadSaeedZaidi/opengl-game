@@ -16,6 +16,10 @@ struct TextureRegion {
   int y = 0;
   int w = 0;
   int h = 0;
+  // 0, 90, 180, or 270. Applied during upload so the uploaded texture is
+  // the region rotated by this many degrees (with the stbi top-down axis-flip
+  // baked in). For 90/270 the uploaded dimensions swap relative to w/h.
+  int rotation = 0;
 
   // 0 means "not yet uploaded" (and is also what an upload failure returns).
   GLuint cachedId = 0;

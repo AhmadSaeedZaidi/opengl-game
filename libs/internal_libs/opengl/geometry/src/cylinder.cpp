@@ -16,6 +16,7 @@ OpenGL::Geometry::Cylinder::Cylinder(const glm::vec3& position, float radius, fl
       capsTexID(0) {
   position_ = position;
   scale_ = glm::vec3(1.0f);
+  rotation_ = glm::vec3(180.0f, 0.0f, 0.0f);
   updateModelMatrix();
 }
 
@@ -23,8 +24,6 @@ OpenGL::Geometry::Cylinder::~Cylinder() {
   if (VAO) glDeleteVertexArrays(1, &VAO);
   if (VBO) glDeleteBuffers(1, &VBO);
   if (EBO) glDeleteBuffers(1, &EBO);
-  if (sidesTexID) glDeleteTextures(1, &sidesTexID);
-  if (capsTexID) glDeleteTextures(1, &capsTexID);
 }
 
 void OpenGL::Geometry::Cylinder::init() {

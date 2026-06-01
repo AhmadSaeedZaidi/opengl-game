@@ -38,9 +38,21 @@ void copyRowsReversed(const unsigned char* src, unsigned char* dst, int imgW, in
   }
 }
 
-// Uploads the rect [rx, ry, rx+rw, ry+rh] of `imagePath` as a new GL texture.
-// Returns 0 on any failure.
-GLuint uploadRegionToGpu(const std::string& imagePath, int rx, int ry, int rw, int rh) {
+// Normalize a rotation in degrees to one of {0, 90, 180, 270}.
+// Returns 0 for any value that isn't a multiple of 90.
+int normalizeRotation(int rotation) {
+  int r = rotation % 360;
+  if (r < 0) r += 360;
+  if (r == 90 || r == 180 || r == 270) return r;
+  return 0;
+}
+
+// Uploads the rect [rx, ry, rx+rw, ry+rh] of `imagePath` as a new GL texture,
+// applying the stbi top-down axis-flip and an optional rotation in one pass.
+// The resulting uploaded dimensions are written to `outW` / `outH` (these
+// swap for 90°/270°). Returns 0 on any failure.
+GLuint uploadRegionToGpu(const std::string& imagePath, int rx, int ry, int rw, int rh,
+                         int rotation, int& outW, int& outH) {
   int imgW = 0;
   int imgH = 0;
   int imgC = 0;
@@ -57,13 +69,45 @@ GLuint uploadRegionToGpu(const std::string& imagePath, int rx, int ry, int rw, i
     return 0;
   }
 
-  // Copy the region out row-by-row, reversing the row order so the region's
-  // "top" (in the source image) maps to the texture's "top" (UV v=1).
-  std::vector<unsigned char> sub(static_cast<size_t>(rw) * rh * imgC);
-  for (int row = 0; row < rh; ++row) {
-    const unsigned char* src = data + ((ry + (rh - 1 - row)) * imgW + rx) * imgC;
-    unsigned char* dst = sub.data() + static_cast<size_t>(row) * rw * imgC;
-    std::memcpy(dst, src, static_cast<size_t>(rw) * imgC);
+  const int rot = normalizeRotation(rotation);
+  if (rot == 90 || rot == 270) {
+    outW = rh;
+    outH = rw;
+  } else {
+    outW = rw;
+    outH = rh;
+  }
+
+  // For each output pixel (outRow, outCol) compute the source pixel
+  // (srcRow, srcCol) that maps to it. The mapping combines the stbi
+  // top-down axis-flip (row reversal) with the requested rotation.
+  std::vector<unsigned char> buf(static_cast<size_t>(outW) * outH * imgC);
+  for (int outRow = 0; outRow < outH; ++outRow) {
+    for (int outCol = 0; outCol < outW; ++outCol) {
+      int srcRow, srcCol;
+      switch (rot) {
+        case 0:
+          srcRow = rh - 1 - outRow;
+          srcCol = outCol;
+          break;
+        case 90:
+          srcRow = rh - 1 - outCol;
+          srcCol = outRow;
+          break;
+        case 180:
+          srcRow = rh - 1 - outRow;
+          srcCol = rw - 1 - outCol;
+          break;
+        case 270:
+        default:
+          srcRow = outCol;
+          srcCol = rw - 1 - outRow;
+          break;
+      }
+      const unsigned char* src = data + ((ry + srcRow) * imgW + (rx + srcCol)) * imgC;
+      unsigned char* dst = buf.data() + (outRow * outW + outCol) * imgC;
+      std::memcpy(dst, src, imgC);
+    }
   }
 
   const GLenum fmt = (imgC == 4 ? GL_RGBA : GL_RGB);
@@ -71,7 +115,7 @@ GLuint uploadRegionToGpu(const std::string& imagePath, int rx, int ry, int rw, i
   glGenTextures(1, &texID);
   glBindTexture(GL_TEXTURE_2D, texID);
   setupSubtextureParams();
-  glTexImage2D(GL_TEXTURE_2D, 0, fmt, rw, rh, 0, fmt, GL_UNSIGNED_BYTE, sub.data());
+  glTexImage2D(GL_TEXTURE_2D, 0, fmt, outW, outH, 0, fmt, GL_UNSIGNED_BYTE, buf.data());
   glGenerateMipmap(GL_TEXTURE_2D);
 
   stbi_image_free(data);
@@ -146,6 +190,24 @@ TextureAtlas::TextureAtlas(const std::string& configPath) {
     r.y = entry["y"].get<int>();
     r.w = entry["w"].get<int>();
     r.h = entry["h"].get<int>();
+    // Optional "rotate" in degrees (0, 90, 180, 270). Other values are
+    // rejected so the JSON doesn't silently fall back to no-rotation.
+    r.rotation = 0;
+    if (entry.contains("rotate")) {
+      const auto& rot = entry["rotate"];
+      if (!rot.is_number_integer()) {
+        throw std::runtime_error("TextureAtlas: region '" + name +
+                                 "' has a non-integer 'rotate' value");
+      }
+      const int deg = rot.get<int>();
+      const int norm = ((deg % 360) + 360) % 360;
+      if (norm != 0 && norm != 90 && norm != 180 && norm != 270) {
+        throw std::runtime_error("TextureAtlas: region '" + name +
+                                 "' has invalid rotation " + std::to_string(deg) +
+                                 "° (must be 0, 90, 180, or 270)");
+      }
+      r.rotation = norm;
+    }
     r.cachedId = 0;
     regions_.emplace(name, r);
   }
@@ -189,14 +251,19 @@ const TextureRegion& TextureAtlas::getRegion(const std::string& name) {
 
   // Lazy upload: each entry uploads at most once. Full-image backgrounds set
   // x/y/w/h from the loaded image dimensions; packed regions already have
-  // those fields from the JSON config.
+  // those fields from the JSON config (and may have w/h updated below for
+  // 90/270 rotations).
   if (it->second.cachedId == 0) {
     auto bgIt = fullImagePaths_.find(name);
     if (bgIt != fullImagePaths_.end()) {
       it->second.cachedId = uploadFullImageToGpu(bgIt->second, it->second);
     } else {
+      int outW = 0, outH = 0;
       it->second.cachedId = uploadRegionToGpu(atlasImagePath_, it->second.x, it->second.y,
-                                              it->second.w, it->second.h);
+                                              it->second.w, it->second.h, it->second.rotation,
+                                              outW, outH);
+      it->second.w = outW;
+      it->second.h = outH;
     }
   }
   return it->second;

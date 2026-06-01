@@ -20,7 +20,6 @@ OpenGL::Geometry::Sphere::~Sphere() {
   if (VAO) glDeleteVertexArrays(1, &VAO);
   if (VBO) glDeleteBuffers(1, &VBO);
   if (EBO) glDeleteBuffers(1, &EBO);
-  if (textureID) glDeleteTextures(1, &textureID);
 }
 
 void OpenGL::Geometry::Sphere::init() {
