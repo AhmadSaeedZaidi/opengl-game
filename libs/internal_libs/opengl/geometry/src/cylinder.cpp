@@ -96,7 +96,7 @@ void OpenGL::Geometry::Cylinder::generateSideVertices() {
   // Generate vertices for cylinder sides oriented along X-axis
   // We need exactly 'segments' unique positions around the circumference
   for (int i = 0; i < segments_; ++i) {
-    float angle = 2.0f * M_PI * i / segments_;
+    float angle = 2.0f * glm::pi<float>() * i / segments_;
     float y = radius_ * cos(angle);
     float z = radius_ * sin(angle);
 
@@ -160,7 +160,7 @@ void OpenGL::Geometry::Cylinder::generateCapVertices() {
 
   // Left cap edge vertices (same positions as side vertices but different normals)
   for (int i = 0; i < segments_; ++i) {
-    float angle = 2.0f * M_PI * i / segments_;
+    float angle = 2.0f * glm::pi<float>() * i / segments_;
     float y = radius_ * cos(angle);
     float z = radius_ * sin(angle);
 
@@ -174,7 +174,7 @@ void OpenGL::Geometry::Cylinder::generateCapVertices() {
 
   // Right cap edge vertices
   for (int i = 0; i < segments_; ++i) {
-    float angle = 2.0f * M_PI * i / segments_;
+    float angle = 2.0f * glm::pi<float>() * i / segments_;
     float y = radius_ * cos(angle);
     float z = radius_ * sin(angle);
 

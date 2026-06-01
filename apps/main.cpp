@@ -26,10 +26,10 @@ int main() {
                                                                 "board_caps");
 
   std::cout << "Adding Ball to Game..." << std::endl;
-  game->setBall(std::move(ball));  // CHANGE: Use setBall() instead of addShape()
+  game->setBall(std::move(ball));
 
   std::cout << "Adding Board to Game..." << std::endl;
-  game->setBoard(std::move(board));  // CHANGE: Use setBoard() instead of addShape()
+  game->setBoard(std::move(board));
 
   std::cout << "Starting game..." << std::endl;
   game->run();

@@ -6,5 +6,8 @@
     "board_caps":  { "x":  512, "y": 1024, "w": 512, "h": 512 },
     "brick_sides": { "x":    0, "y":  512, "w": 512, "h": 512 },
     "brick_caps":  { "x":    0, "y": 1024, "w": 512, "h": 512 }
-  }
+  },
+  "backgrounds": [
+    { "name": "background", "path": "textures/background.png" }
+  ]
 }

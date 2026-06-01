@@ -1,5 +1,4 @@
 #include "sphere.h"
-#include "textures.h"
 #include <iostream>
 #include <cmath>
 

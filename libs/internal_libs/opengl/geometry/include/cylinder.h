@@ -2,8 +2,8 @@
 #define OPENGL_GEOMETRY_CYLINDER_H
 
 #include <shape.h>
-#include <textures.h>
 #include <texture_atlas.h>
+#include <glm/gtc/constants.hpp>
 #include <string>
 
 namespace OpenGL::Geometry {

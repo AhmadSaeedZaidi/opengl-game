@@ -9,11 +9,8 @@ namespace OpenGL::Core {
 
 // A rectangular sub-region of an atlas image.
 //
-// `textureId()` lazily uploads the region's pixels to a new GL texture on
-// first call and caches the ID. The atlas itself is loaded once from disk at
-// TextureAtlas construction; only the per-region subtexture upload is
-// deferred to first use, so the initial startup cost is paid only for regions
-// that are actually referenced.
+// `textureId()` is populated by TextureAtlas::getRegion() on first call,
+// after which it is stable for the atlas's lifetime.
 struct TextureRegion {
   int x = 0;
   int y = 0;
@@ -21,9 +18,7 @@ struct TextureRegion {
   int h = 0;
 
   // 0 means "not yet uploaded" (and is also what an upload failure returns).
-  // Populated by TextureAtlas::getRegion() and then stable for the atlas's
-  // lifetime.
-  mutable GLuint cachedId = 0;
+  GLuint cachedId = 0;
 
   // Convenience accessor — same as reading `cachedId` directly.
   GLuint textureId() const { return cachedId; }
@@ -31,17 +26,19 @@ struct TextureRegion {
 
 class TextureAtlas {
  public:
-  // Loads `configPath` (a JSON file) and reads the source image path and the
-  // named regions. Throws std::runtime_error on:
+  // Loads `configPath` (a JSON file) and reads the source image path, the
+  // named regions, and any full-image backgrounds. Throws std::runtime_error on:
   //   - file IO failure
   //   - JSON parse failure
   //   - missing 'atlas' / 'regions' keys
   //   - a region entry missing x/y/w/h
   explicit TextureAtlas(const std::string& configPath);
 
-  // Returns the named region. Throws std::runtime_error if the name is not in
-  // the config.
-  const TextureRegion& getRegion(const std::string& name) const;
+  // Returns the named region (either a packed sub-region or a full-image
+  // background). Lazily uploads the texture to the GPU on first call.
+  // Throws std::runtime_error if the name is not in the config. Non-const
+  // because the first call performs a GPU upload that mutates the entry.
+  const TextureRegion& getRegion(const std::string& name);
 
   // Path of the source atlas image (relative to the working dir at load time).
   const std::string& imagePath() const { return atlasImagePath_; }
@@ -49,6 +46,10 @@ class TextureAtlas {
  private:
   std::string atlasImagePath_;
   std::unordered_map<std::string, TextureRegion> regions_;
+  // Names declared under the "backgrounds" array map to a full image path
+  // rather than a sub-region of the main atlas. getRegion() checks this map
+  // first and uploads the entire image on first reference.
+  std::unordered_map<std::string, std::string> fullImagePaths_;
 };
 
 }  // namespace OpenGL::Core

@@ -20,9 +20,6 @@ OpenGL::Game::Objects::Ball::Ball(const glm::vec3& position, OpenGL::Core::Textu
 }
 
 void OpenGL::Game::Objects::Ball::update(float deltaTime) {
-  // Apply gravity (only in Y direction)
-  // velocity2D_.y += GRAVITY_2D * deltaTime;
-
   // Limit speed to prevent crazy physics
   float speed = sqrt(velocity2D_.x * velocity2D_.x + velocity2D_.y * velocity2D_.y);
   if (speed > SPEED_LIMIT) {

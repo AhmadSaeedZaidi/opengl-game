@@ -31,14 +31,6 @@ OpenGL::Game::Game::Game(int width, int height, const char* title, const char* v
 
 OpenGL::Game::Game::~Game() = default;
 
-void OpenGL::Game::Game::addShape(std::unique_ptr<OpenGL::Geometry::Shape> shape) {
-  shapes_.emplace_back(std::move(shape));
-}
-
-void OpenGL::Game::Game::addBrick(std::unique_ptr<Objects::Brick> brick) {
-  bricks_.emplace_back(std::move(brick));
-}
-
 void OpenGL::Game::Game::setBall(std::unique_ptr<Objects::Ball> ball) { ball_ = std::move(ball); }
 
 void OpenGL::Game::Game::setBoard(std::unique_ptr<Objects::Board3D> board) {
@@ -65,13 +57,13 @@ void OpenGL::Game::Game::init() {
   shader_.setBool("hasSidesTexture", true);
   shader_.setBool("hasCapsTexture", true);
 
-  // Initialize all shapes
-#if OPENGL_VERBOSE_LOG
-  std::cout << "Game::init() - Initializing " << shapes_.size() << " shapes" << std::endl;
-#endif
-  for (size_t i = 0; i < shapes_.size(); ++i) {
-    shapes_[i]->init();
-  }
+  // Background plane. Created after the GL context exists so Plane::init() can
+  // upload the texture. If the region is missing or the file is unreadable the
+  // plane still draws (as an untextured quad) — graceful degradation.
+  backgroundPlane_ = std::make_unique<OpenGL::Geometry::Plane>(
+      glm::vec3(0.0f, 0.0f, BACKGROUND_Z), BACKGROUND_WIDTH, BACKGROUND_HEIGHT, *atlas_,
+      BACKGROUND_REGION);
+  backgroundPlane_->init();
 
   // Initialize game objects
   if (ball_) ball_->init();
@@ -155,9 +147,11 @@ void OpenGL::Game::Game::render(float deltaTime) {
 }
 
 void OpenGL::Game::Game::renderGameObjects(float deltaTime) {
-  // Render regular shapes
-  for (size_t i = 0; i < shapes_.size(); ++i) {
-    shapes_[i]->draw(shader_.ID, deltaTime, window);
+  // Background first. With depth testing on, the play area will paint over
+  // it where their Z ranges overlap; drawing it first also avoids wasting
+  // fragment work on areas the play area will overwrite later.
+  if (backgroundPlane_) {
+    backgroundPlane_->draw(shader_.ID, deltaTime, window);
   }
 
   // Render game objects

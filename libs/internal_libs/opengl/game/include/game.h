@@ -5,6 +5,7 @@
 #include <shaders.h>
 #include <camera.h>
 #include <shape.h>
+#include <plane.h>
 #include <texture_atlas.h>
 #include "objects/ball.h"
 #include "objects/brick.h"
@@ -35,6 +36,14 @@ class Game : public OpenGL::Core::WindowApp {
   // main() can construct shapes against the same atlas before run().
   static constexpr const char* ATLAS_CONFIG_PATH = "textures/atlas.json";
 
+  // Background plane. Sits behind the play area in world space (low z) and
+  // uses the "background" region of the atlas. Drawn first so depth testing
+  // naturally occludes nothing of the play area.
+  static constexpr const char* BACKGROUND_REGION = "background";
+  static constexpr float BACKGROUND_WIDTH = 20.0f;    // 16:9 ratio
+  static constexpr float BACKGROUND_HEIGHT = 11.25f;  // 20 * 9/16
+  static constexpr float BACKGROUND_Z = -10.0f;       // far behind the play area
+
   Game(int width, int height, const char* title, const char* vertexShader,
        const char* fragmentShader);
   ~Game();
@@ -44,8 +53,6 @@ class Game : public OpenGL::Core::WindowApp {
   OpenGL::Core::TextureAtlas& atlas() { return *atlas_; }
 
   // Object management
-  void addShape(std::unique_ptr<OpenGL::Geometry::Shape> shape);
-  void addBrick(std::unique_ptr<OpenGL::Game::Objects::Brick> brick);
   void setBall(std::unique_ptr<OpenGL::Game::Objects::Ball> ball);
   void setBoard(std::unique_ptr<OpenGL::Game::Objects::Board3D> board);
 
@@ -65,7 +72,8 @@ class Game : public OpenGL::Core::WindowApp {
   // Rendering
   OpenGL::Core::Shader shader_;
   OpenGL::Graphics::OrbitCamera camera_;
-  std::vector<std::unique_ptr<OpenGL::Geometry::Shape>> shapes_;
+  // World-fixed background plane. Created in init() and drawn first.
+  std::unique_ptr<OpenGL::Geometry::Plane> backgroundPlane_;
 
   // Game objects
   std::unique_ptr<Objects::Ball> ball_;

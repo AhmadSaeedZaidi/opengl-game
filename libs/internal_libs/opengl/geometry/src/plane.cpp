@@ -1,5 +1,4 @@
 #include "plane.h"
-#include "textures.h"
 #include "log.h"
 #include <iostream>
 

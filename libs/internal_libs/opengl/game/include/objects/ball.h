@@ -44,8 +44,6 @@ class Ball : public OpenGL::Geometry::Sphere {
   float radius_;
   glm::vec3 startPosition_;
 
-  static constexpr float GRAVITY_2D = -9.81f * 0.1f;
-  static constexpr float BOUNCE_DAMPING = 0.95f;
   static constexpr float SPEED_LIMIT = 5.0f;
 };
 
