@@ -3,19 +3,20 @@
 
 #include <shape.h>
 #include <textures.h>
+#include <texture_atlas.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 namespace OpenGL::Geometry {
 class Rectangle : public Shape {
  public:
-  // coords = { Ax, Ay, Bx, By }
-  // textureFile is now passed in
-  Rectangle(const float coords[4], const char* textureFile, int x, int y, int w, int h);
+  // coords = { Ax, Ay, Bx, By }. The texture comes from `atlas`[regionName].
+  Rectangle(const float coords[4], OpenGL::Core::TextureAtlas& atlas, std::string regionName);
   ~Rectangle() override;
 
   void init() override;
-  void draw(GLuint ShaderID, float deltaTime) override;
+  void draw(GLuint ShaderID, float deltaTime, GLFWwindow* window) override;
 
  protected:
   glm::mat4 trans = glm::mat4(1.0f);
@@ -28,9 +29,10 @@ class Rectangle : public Shape {
 
   // Rectangle corner coordinates
   float Ax, Ay, Bx, By;
-  // Texture coordinates in the atlas
-  int x, y, w, h;
-  const char* texPath;
+
+  // Texture lookup info
+  OpenGL::Core::TextureAtlas& atlas_;
+  std::string regionName_;
 };
 }  // namespace OpenGL::Geometry
 #endif  // RECTANGLE_H

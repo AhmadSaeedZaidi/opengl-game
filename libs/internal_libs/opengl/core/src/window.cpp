@@ -43,25 +43,31 @@ OpenGL::Core::WindowApp::~WindowApp() {
 }
 
 void OpenGL::Core::WindowApp::run() {
-  init();  // call the init method to set up the window and OpenGL context
+  init();
 
   if (!window) {
-    std::cout << "Window initialization failed\n";
+    std::cerr << "Window initialization failed\n";
     return;
   }
+
+  glfwSwapInterval(1);
+
   double last = glfwGetTime();
   while (!glfwWindowShouldClose(window)) {
     glfwPollEvents();
     double now = glfwGetTime();
-    float delta = float(now - last);
+    float delta = static_cast<float>(now - last);
     last = now;
+
+    if (delta > 0.1f) {
+      delta = 0.1f;
+    }
+
     processInput();
-    render(delta);
     update(delta);
+    render(delta);
     glfwSwapBuffers(window);
   }
-  glfwDestroyWindow(window);
-  glfwTerminate();
 }
 
 void OpenGL::Core::WindowApp::render(float deltaTime) {

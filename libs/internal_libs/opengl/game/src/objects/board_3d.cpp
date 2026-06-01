@@ -1,30 +1,33 @@
 #include "objects/board_3d.h"
 #include "managers/collision_manager.h"  // Add this for collision support
+#include "log.h"
 #include <iostream>
 
-OpenGL::Game::Objects::Board3D::Board3D()
+OpenGL::Game::Objects::Board3D::Board3D(OpenGL::Core::TextureAtlas& atlas,
+                                           std::string sidesRegion, std::string capsRegion)
     : OpenGL::Geometry::Cylinder(
           glm::vec3(0.0f, -1.5f, 0.0f),  // Move down on Y-axis
           BOARD_HEIGHT * 0.5f,           // radius = half the height for thin cylinder
           BOARD_WIDTH,                   // height (length) = board width
-          "textures/atlas.png",          // atlas file
-          0, 0, 384 / 4, 512 / 4,        // sides texture region (rotated 90°)
-          0, 512 / 4, 384 / 4, 512 / 4,  // caps texture region (end caps)
+          atlas,                         // shared texture atlas
+          std::move(sidesRegion),        // sides region name
+          std::move(capsRegion),         // caps region name
           16),                           // 16 segments for smoothness
       currentSpeed_(speed_),             // Initialize current speed
       paddleHits_(0)                     // Initialize hit counter
 {
+#if OPENGL_VERBOSE_LOG
   std::cout << "Board3D Created - Initial Speed: " << currentSpeed_ << std::endl;
+#endif
 }
 
-void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime) {
+void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime, GLFWwindow* w) {
   if (!ShaderID) {
     std::cerr << "ERROR: Shader ID is not set for Board3D::draw\n";
     return;
   }
 
   // 1) Handle input
-  GLFWwindow* w = glfwGetCurrentContext();
   float movement = 0.0f;
 
   if (glfwGetKey(w, GLFW_KEY_LEFT) == GLFW_PRESS || glfwGetKey(w, GLFW_KEY_A) == GLFW_PRESS) {
@@ -53,19 +56,23 @@ void OpenGL::Game::Objects::Board3D::draw(GLuint ShaderID, float deltaTime) {
   }
 
   // 3) Call parent's draw method
-  OpenGL::Geometry::Cylinder::draw(ShaderID, deltaTime);
+  OpenGL::Geometry::Cylinder::draw(ShaderID, deltaTime, w);
 }
 
 void OpenGL::Game::Objects::Board3D::onBallHit() {
   paddleHits_++;
   currentSpeed_ = std::min(speed_ + (paddleHits_ * SPEED_BOOST_PER_HIT), MAX_SPEED);
+#if OPENGL_VERBOSE_LOG
   std::cout << "Paddle hit #" << paddleHits_ << "! Speed now: " << currentSpeed_ << std::endl;
+#endif
 }
 
 void OpenGL::Game::Objects::Board3D::resetSpeed() {
   paddleHits_ = 0;
   currentSpeed_ = speed_;
+#if OPENGL_VERBOSE_LOG
   std::cout << "Paddle speed reset to: " << currentSpeed_ << std::endl;
+#endif
 }
 
 // Collision support method for managers

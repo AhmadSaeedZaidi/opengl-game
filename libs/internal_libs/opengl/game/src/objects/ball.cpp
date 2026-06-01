@@ -1,19 +1,22 @@
 #include "objects/ball.h"
 #include "managers/collision_manager.h"
+#include "log.h"
 #include <iostream>
 #include <algorithm>
 #include <cmath>
 
-OpenGL::Game::Objects::Ball::Ball(const glm::vec3& position, float radius)
-    : OpenGL::Geometry::Sphere(position, radius,
-                               "textures/atlas.png",                // atlas file
-                               384 / 4, 512 / 4, 384 / 4, 512 / 4,  // ball texture region
-                               8, 8),                               // latitude, longitude segments
-      velocity2D_(1.0f, 2.0f),                                      // Start with some velocity
+OpenGL::Game::Objects::Ball::Ball(const glm::vec3& position, OpenGL::Core::TextureAtlas& atlas,
+                                 std::string regionName, float radius)
+    : OpenGL::Geometry::Sphere(position, radius, atlas, std::move(regionName),
+                               8,   // latitude segments
+                               8),  // longitude segments
+      velocity2D_(1.0f, 2.0f),    // Start with some velocity
       radius_(radius),
       startPosition_(position) {  // Store start position
+#if OPENGL_VERBOSE_LOG
   std::cout << "Ball Created at position: " << position.x << ", " << position.y << ", "
             << position.z << std::endl;
+#endif
 }
 
 void OpenGL::Game::Objects::Ball::update(float deltaTime) {
@@ -39,15 +42,17 @@ void OpenGL::Game::Objects::Ball::update(float deltaTime) {
   // NOTE: Collision detection removed - now handled by CollisionManager
 }
 
-void OpenGL::Game::Objects::Ball::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Game::Objects::Ball::draw(GLuint shaderID, float deltaTime, GLFWwindow* window) {
   // Call parent's draw method
-  OpenGL::Geometry::Sphere::draw(shaderID, deltaTime);
+  OpenGL::Geometry::Sphere::draw(shaderID, deltaTime, window);
 }
 
 void OpenGL::Game::Objects::Ball::resetToStart() {
   setPosition(startPosition_);
   setVelocity2D(glm::vec2(1.0f, 2.0f));  // Reset with initial velocity
+#if OPENGL_VERBOSE_LOG
   std::cout << "Ball reset to start position!" << std::endl;
+#endif
 }
 
 // Now define the method that returns Circle2D (was inline in header)

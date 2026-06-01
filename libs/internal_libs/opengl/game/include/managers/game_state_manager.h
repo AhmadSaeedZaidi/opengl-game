@@ -13,7 +13,6 @@ class GameStateManager {
 
   // State management
   GameState getState() const { return state_; }
-  GameState getCurrentState() const { return state_; } 
   void setState(GameState state);
   bool isPlaying() const { return state_ == GameState::PLAYING; }
   bool isPaused() const { return state_ == GameState::PAUSED; }

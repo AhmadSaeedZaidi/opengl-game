@@ -1,9 +1,11 @@
 #include "plane.h"
 #include "textures.h"
+#include "log.h"
 #include <iostream>
 
-OpenGL::Geometry::Plane::Plane(const glm::vec3& position, float width, float height, const char* texturePath)
-    : width_(width), height_(height), texturePath_(texturePath), textureID_(0) {
+OpenGL::Geometry::Plane::Plane(const glm::vec3& position, float width, float height,
+                                 OpenGL::Core::TextureAtlas& atlas, std::string regionName)
+    : width_(width), height_(height), atlas_(atlas), regionName_(std::move(regionName)), textureID_(0) {
   position_ = position;
   scale_ = glm::vec3(1.0f);
   updateModelMatrix();
@@ -47,12 +49,17 @@ void OpenGL::Geometry::Plane::init() {
 
   glBindVertexArray(0);
 
-  if (texturePath_) {
-    int w, h, c;
-    textureID_ = OpenGL::Core::Textures::loadTexture(texturePath_, w, h, c);
+  if (!regionName_.empty()) {
+    const OpenGL::Core::TextureRegion& region = atlas_.getRegion(regionName_);
+    textureID_ = region.textureId();
+    if (textureID_ == 0) {
+      std::cerr << "Plane::init() failed to load region '" << regionName_ << "'\n";
+    }
   }
 
+#if OPENGL_VERBOSE_LOG
   std::cout << "Plane initialized" << std::endl;
+#endif
 }
 
 void OpenGL::Geometry::Plane::generatePlane() {
@@ -94,7 +101,7 @@ void OpenGL::Geometry::Plane::generatePlane() {
   };
 }
 
-void OpenGL::Geometry::Plane::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Geometry::Plane::draw(GLuint shaderID, float deltaTime, GLFWwindow* /*window*/) {
   if (!shaderID) {
     std::cerr << "ERROR: Shader ID is not set for Plane::draw\n";
     return;

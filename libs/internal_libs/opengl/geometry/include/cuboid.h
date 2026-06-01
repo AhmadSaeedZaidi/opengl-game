@@ -1,19 +1,22 @@
-#ifndef CUBOID
-#define CUBOID
+#ifndef OPENGL_GEOMETRY_CUBOID_H
+#define OPENGL_GEOMETRY_CUBOID_H
 
 #include <shape.h>
 #include <textures.h>
+#include <texture_atlas.h>
+#include <string>
 
 namespace OpenGL::Geometry {
 class Cuboid : public Shape {
  public:
-  // Create a cuboid with position, size, and up to 2 textures
-  Cuboid(const glm::vec3& position, const glm::vec3& size, const char* atlas = nullptr, int x1 = 0,
-         int y1 = 0, int w1 = 0, int h1 = 0, int x2 = 0, int y2 = 0, int w2 = 0, int h2 = 0);
+  // Create a cuboid with two atlas-driven textures. `sidesRegion` and
+  // `capsRegion` must both be present in `atlas`.
+  Cuboid(const glm::vec3& position, const glm::vec3& size, OpenGL::Core::TextureAtlas& atlas,
+         std::string sidesRegion, std::string capsRegion);
   ~Cuboid() override;
 
   void init() override;
-  void draw(GLuint ShaderID, float deltaTime) override;
+  void draw(GLuint ShaderID, float deltaTime, GLFWwindow* window) override;
 
  protected:
   void updateModelMatrix() override;
@@ -23,11 +26,11 @@ class Cuboid : public Shape {
   GLuint sidesTexID = 0, capsTexID = 0;
 
   // Texture atlas properties
-  const char* atlasPath;
-  int X1, Y1, W1, H1;  // Texture coordinates for first texture
-  int X2, Y2, W2, H2;  // Texture coordinates for second texture
+  OpenGL::Core::TextureAtlas& atlas_;
+  std::string sidesRegion_;
+  std::string capsRegion_;
 
   void setupVertices();
 };
 }  // namespace OpenGL::Geometry
-#endif  // CUBOID_H
+#endif  // OPENGL_GEOMETRY_CUBOID_H

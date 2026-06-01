@@ -1,8 +1,7 @@
-#ifndef SHAPE
-#define SHAPE
-#include <memory>
-#include <textures.h>
+#ifndef OPENGL_GEOMETRY_SHAPE_H
+#define OPENGL_GEOMETRY_SHAPE_H
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -21,11 +20,11 @@ class Shape {
  public:
   virtual ~Shape() = default;
   virtual void init() = 0;
-  virtual void draw(GLuint shaderID, float deltaTime) = 0;
-
-  // Texture methods
-  virtual void setTexture(std::shared_ptr<OpenGL::Core::Textures> tex);
-  virtual unsigned int getTextureId() const;
+  // `window` is passed through so subclasses that need GLFW input
+  // (e.g. Board3D's keyboard polling) can read it without going through
+  // the global `glfwGetCurrentContext()`. Shapes that don't need it can
+  // simply ignore the argument.
+  virtual void draw(GLuint shaderID, float deltaTime, GLFWwindow* window) = 0;
 
   // Common transform methods - DECLARATIONS ONLY
   virtual void setPosition(const glm::vec3& pos);
@@ -37,14 +36,12 @@ class Shape {
   virtual void translate(const glm::vec3& offset);
 
   // Getters
-  virtual glm::mat4 getModelMatrix() const { return modelMatrix_; }
-  virtual glm::vec3 getPosition() const { return position_; }
-  virtual glm::vec3 getRotation() const { return rotation_; }
-  virtual glm::vec3 getScale() const { return scale_; }
+  glm::mat4 getModelMatrix() const { return modelMatrix_; }
+  glm::vec3 getPosition() const { return position_; }
+  glm::vec3 getRotation() const { return rotation_; }
+  glm::vec3 getScale() const { return scale_; }
 
  protected:
-  std::shared_ptr<OpenGL::Core::Textures> texture;
-
   // Common transform properties
   glm::mat4 modelMatrix_ = glm::mat4(1.0f);
   glm::vec3 position_ = glm::vec3(0.0f);
@@ -60,4 +57,4 @@ class Shape {
   virtual void updateModelMatrix();
 };
 }  // namespace OpenGL::Geometry
-#endif
+#endif  // OPENGL_GEOMETRY_SHAPE_H

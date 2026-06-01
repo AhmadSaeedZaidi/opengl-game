@@ -38,34 +38,43 @@ void OpenGL::Game::Managers::HUDManager::init() {
 
 void OpenGL::Game::Managers::HUDManager::update(float deltaTime) {
     updateTimer_ += deltaTime;
-    
+
     // Only update display at specified intervals
     if (updateTimer_ >= updateInterval_) {
         updateTimer_ = 0.0f;
-        
+
         // Check if any values changed
         bool needsUpdate = false;
-        
+
         if (gameState_.getScore() != lastScore_ ||
             gameState_.getLives() != lastLives_ ||
-            gameState_.getCurrentState() != lastState_) {
+            gameState_.getState() != lastState_) {
             needsUpdate = true;
         }
-        
+
         if (needsUpdate) {
+            // Reset one-shot banner flags when returning to PLAYING so the
+            // banners can reappear after a Space-to-reset.
+            if (gameState_.getState() == GameState::PLAYING &&
+                lastState_ != GameState::PLAYING) {
+                gameOverShown_ = false;
+                winShown_ = false;
+                pausedShown_ = false;
+            }
+
             renderGameStatus();
-            
+
             // Update cached values
             lastScore_ = gameState_.getScore();
             lastLives_ = gameState_.getLives();
-            lastState_ = gameState_.getCurrentState();
+            lastState_ = gameState_.getState();
         }
     }
 }
 
 void OpenGL::Game::Managers::HUDManager::render() {
     // Handle state-specific displays
-    switch (gameState_.getCurrentState()) {
+    switch (gameState_.getState()) {
         case GameState::GAME_OVER:
             showGameOver();
             break;
@@ -92,9 +101,8 @@ void OpenGL::Game::Managers::HUDManager::showGameStart() {
 }
 
 void OpenGL::Game::Managers::HUDManager::showGameOver() {
-    static bool shown = false;
-    if (shown) return;
-    
+    if (gameOverShown_) return;
+
     clearLine();
     std::cout << "\n";
     printBorder();
@@ -103,14 +111,13 @@ void OpenGL::Game::Managers::HUDManager::showGameOver() {
     std::cout << "|          Press ESC to quit                  |\n";
     printBorder();
     std::cout << "\n";
-    
-    shown = true;
+
+    gameOverShown_ = true;
 }
 
 void OpenGL::Game::Managers::HUDManager::showWin() {
-    static bool shown = false;
-    if (shown) return;
-    
+    if (winShown_) return;
+
     clearLine();
     std::cout << "\n";
     printBorder();
@@ -121,14 +128,13 @@ void OpenGL::Game::Managers::HUDManager::showWin() {
     std::cout << "|          Press ESC to quit                  |\n";
     printBorder();
     std::cout << "\n";
-    
-    shown = true;
+
+    winShown_ = true;
 }
 
 void OpenGL::Game::Managers::HUDManager::showPaused() {
-    static bool shown = false;
-    if (shown) return;
-    
+    if (pausedShown_) return;
+
     clearLine();
     std::cout << "\n";
     printBorder();
@@ -136,8 +142,8 @@ void OpenGL::Game::Managers::HUDManager::showPaused() {
     std::cout << "|        Press P to resume game               |\n";
     printBorder();
     std::cout << "\n";
-    
-    shown = true;
+
+    pausedShown_ = true;
 }
 
 void OpenGL::Game::Managers::HUDManager::renderGameStatus() {
@@ -149,7 +155,7 @@ void OpenGL::Game::Managers::HUDManager::renderGameStatus() {
               << " | Bricks: " << std::setw(3) << gameState_.getRemainingBricks()
               << " | State: ";
     
-    switch (gameState_.getCurrentState()) {
+    switch (gameState_.getState()) {
         case GameState::PLAYING:
             std::cout << "PLAYING ";
             break;

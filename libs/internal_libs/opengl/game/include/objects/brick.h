@@ -2,7 +2,11 @@
 #define OPENGL_GAME_OBJECTS_BRICK_H
 
 #include "cylinder.h"
+#include <texture_atlas.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <string>
+#include <utility>
 
 // Forward declaration to avoid circular include
 namespace OpenGL::Game::Managers {
@@ -13,10 +17,13 @@ namespace OpenGL::Game::Objects {
 
 class Brick : public OpenGL::Geometry::Cylinder {
  public:
-  Brick(const glm::vec3& position, const glm::vec3& color = glm::vec3(1.0f, 0.5f, 0.2f));
+  // `sidesRegion` and `capsRegion` must exist in `atlas`
+  // (e.g. "brick_sides", "brick_caps").
+  Brick(const glm::vec3& position, OpenGL::Core::TextureAtlas& atlas, std::string sidesRegion,
+        std::string capsRegion, const glm::vec3& color = glm::vec3(1.0f, 0.5f, 0.2f));
   ~Brick() = default;
 
-  void draw(GLuint shaderID, float deltaTime) override;
+  void draw(GLuint shaderID, float deltaTime, GLFWwindow* window) override;
 
   // Collision detection
   bool isDestroyed() const { return destroyed_; }

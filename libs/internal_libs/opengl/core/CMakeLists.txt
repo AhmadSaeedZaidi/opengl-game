@@ -24,4 +24,5 @@ target_link_libraries(opengl_core PUBLIC
     glad
     glfw
     stb_image
+    nlohmann_json::nlohmann_json
 )

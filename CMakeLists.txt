@@ -29,6 +29,9 @@ file(GLOB TEXTURE_FILES
      "${CMAKE_SOURCE_DIR}/textures/*.jpg"
      # add more extensions if needed
 )
+file(GLOB TEXTURE_CONFIG_FILES
+     "${CMAKE_SOURCE_DIR}/textures/*.json"
+)
 
 # Create shader and texture directories in build folder
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/apps/shaders)
@@ -46,6 +49,18 @@ foreach(TEXT_FILE ${TEXTURE_FILES})
   configure_file(
     ${TEXT_FILE}
     ${CMAKE_BINARY_DIR}/apps/textures/${TEXT_NAME}
+    COPYONLY
+  )
+endforeach()
+
+# Copy texture config files (atlas JSON etc.) alongside their images so the
+# relative paths inside the config (e.g. "atlas": "textures/atlas.png") resolve
+# correctly at runtime.
+foreach(TEXT_CFG ${TEXTURE_CONFIG_FILES})
+  get_filename_component(TEXT_CFG_NAME ${TEXT_CFG} NAME)
+  configure_file(
+    ${TEXT_CFG}
+    ${CMAKE_BINARY_DIR}/apps/textures/${TEXT_CFG_NAME}
     COPYONLY
   )
 endforeach()

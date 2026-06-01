@@ -3,16 +3,14 @@
 #include <iostream>
 #include <cmath>
 
-OpenGL::Geometry::Sphere::Sphere(const glm::vec3& position, float radius, const char* atlas, int x,
-                                 int y, int w, int h, int latitudeSegments, int longitudeSegments)
+OpenGL::Geometry::Sphere::Sphere(const glm::vec3& position, float radius,
+                                 OpenGL::Core::TextureAtlas& atlas, std::string regionName,
+                                 int latitudeSegments, int longitudeSegments)
     : radius_(radius),
       latitudeSegments_(latitudeSegments),
       longitudeSegments_(longitudeSegments),
-      atlasPath(atlas),
-      X(x),
-      Y(y),
-      W(w),
-      H(h),
+      atlas_(atlas),
+      regionName_(std::move(regionName)),
       textureID(0) {
   position_ = position;
   scale_ = glm::vec3(1.0f);
@@ -61,13 +59,11 @@ void OpenGL::Geometry::Sphere::init() {
 
   glBindVertexArray(0);
 
-  // Load texture if atlas is provided
-  if (atlasPath) {
-    int w, h, channels;
-    textureID = OpenGL::Core::Textures::loadTextureRegion(atlasPath, w, h, channels, X, Y, W, H);
-    if (textureID == 0) {
-      std::cerr << "Failed to load sphere texture from atlas: " << atlasPath << std::endl;
-    }
+  // Look up the named region in the atlas. Throws if not found.
+  const OpenGL::Core::TextureRegion& region = atlas_.getRegion(regionName_);
+  textureID = region.textureId();
+  if (textureID == 0) {
+    std::cerr << "Failed to load sphere texture from atlas region '" << regionName_ << "'\n";
   }
 }
 
@@ -80,12 +76,12 @@ void OpenGL::Geometry::Sphere::generateSphere() {
 void OpenGL::Geometry::Sphere::generateVertices() {
   // Generate vertices
   for (int lat = 0; lat <= latitudeSegments_; ++lat) {
-    float theta = lat * M_PI / latitudeSegments_;  // From 0 to PI
-    float sinTheta = sin(theta);
-    float cosTheta = cos(theta);
+      float theta = lat * glm::pi<float>() / latitudeSegments_;  // From 0 to PI
+      float sinTheta = sin(theta);
+      float cosTheta = cos(theta);
 
-    for (int lon = 0; lon <= longitudeSegments_; ++lon) {
-      float phi = lon * 2.0f * M_PI / longitudeSegments_;  // From 0 to 2*PI
+      for (int lon = 0; lon <= longitudeSegments_; ++lon) {
+        float phi = lon * 2.0f * glm::pi<float>() / longitudeSegments_;  // From 0 to 2*PI
       float sinPhi = sin(phi);
       float cosPhi = cos(phi);
 
@@ -126,7 +122,7 @@ void OpenGL::Geometry::Sphere::generateVertices() {
   }
 }
 
-void OpenGL::Geometry::Sphere::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Geometry::Sphere::draw(GLuint shaderID, float deltaTime, GLFWwindow* /*window*/) {
   if (!shaderID) {
     std::cerr << "ERROR: Shader ID is not set for Sphere::draw\n";
     return;

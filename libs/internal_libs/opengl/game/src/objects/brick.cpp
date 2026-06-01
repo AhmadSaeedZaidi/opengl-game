@@ -1,27 +1,31 @@
 #include "objects/brick.h"
 #include "managers/collision_manager.h"  // Include here to get full definition
+#include "log.h"
 #include <iostream>
 
-OpenGL::Game::Objects::Brick::Brick(const glm::vec3& position, const glm::vec3& color)
+OpenGL::Game::Objects::Brick::Brick(const glm::vec3& position, OpenGL::Core::TextureAtlas& atlas,
+                                   std::string sidesRegion, std::string capsRegion,
+                                   const glm::vec3& color)
     : OpenGL::Geometry::Cylinder(position,
                                  BRICK_HEIGHT / 2.0f,   // radius (half height for thin cylinder)
                                  BRICK_WIDTH,           // length along X-axis
-                                 "textures/atlas.png",  // atlas file
-                                 768 / 4, 512 / 4, 384 / 4,
-                                 512 / 4,  // sides texture region (brick pattern)
-                                 768 / 4, 0, 384 / 4, 512 / 4,  // caps texture region (brick ends)
+                                 atlas,                 // shared texture atlas
+                                 std::move(sidesRegion),
+                                 std::move(capsRegion),
                                  8),  // 8 segments (sufficient for brick)
       destroyed_(false),
       color_(color) {
+#if OPENGL_VERBOSE_LOG
   std::cout << "Brick Created at position: " << position.x << ", " << position.y << ", "
             << position.z << std::endl;
+#endif
 }
 
-void OpenGL::Game::Objects::Brick::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Game::Objects::Brick::draw(GLuint shaderID, float deltaTime, GLFWwindow* window) {
   if (destroyed_) return;  // Don't draw if destroyed
 
   // Call parent's draw method
-  OpenGL::Geometry::Cylinder::draw(shaderID, deltaTime);
+  OpenGL::Geometry::Cylinder::draw(shaderID, deltaTime, window);
 }
 
 // Implement the collision box method here (moved from header)

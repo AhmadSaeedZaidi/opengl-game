@@ -4,17 +4,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-OpenGL::Geometry::Rectangle::Rectangle(const float coords[4], const char* textureFile, int x,
-                                       int y, int w, int h)
+OpenGL::Geometry::Rectangle::Rectangle(const float coords[4],
+                                       OpenGL::Core::TextureAtlas& atlas, std::string regionName)
     : Ax(coords[0]),
       Ay(coords[1]),
       Bx(coords[2]),
       By(coords[3]),
-      texPath(textureFile),
-      x(x),
-      y(y),
-      w(w),
-      h(h) {}
+      atlas_(atlas),
+      regionName_(std::move(regionName)) {}
 
 OpenGL::Geometry::Rectangle::~Rectangle() {
   glDeleteVertexArrays(1, &VAO);
@@ -24,10 +21,10 @@ OpenGL::Geometry::Rectangle::~Rectangle() {
 }
 
 void OpenGL::Geometry::Rectangle::init() {
-  int w_, h_, ch;
-  texID = OpenGL::Core::Textures::loadTextureRegion(texPath, w_, h_, ch, x, y, w, h);
+  const OpenGL::Core::TextureRegion& region = atlas_.getRegion(regionName_);
+  texID = region.textureId();
   if (!texID) {
-    std::cerr << "Rectangle::init() failed to load '" << texPath << "'\n";
+    std::cerr << "Rectangle::init() failed to load region '" << regionName_ << "'\n";
     return;
   }
 
@@ -64,7 +61,7 @@ void OpenGL::Geometry::Rectangle::init() {
   glBindVertexArray(0);
 }
 
-void OpenGL::Geometry::Rectangle::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Geometry::Rectangle::draw(GLuint shaderID, float deltaTime, GLFWwindow* /*window*/) {
   if (texID) {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texID);

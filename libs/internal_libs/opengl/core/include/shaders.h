@@ -1,5 +1,5 @@
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef OPENGL_CORE_SHADERS_H
+#define OPENGL_CORE_SHADERS_H
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -34,4 +34,4 @@ class Shader {
 
 }  // namespace OpenGL::Core
 
-#endif
+#endif  // OPENGL_CORE_SHADERS_H

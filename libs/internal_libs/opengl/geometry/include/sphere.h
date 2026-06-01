@@ -2,23 +2,24 @@
 #define OPENGL_GEOMETRY_SPHERE_H
 
 #include "shape.h"
+#include "texture_atlas.h"
+#include <glm/gtc/constants.hpp>
+#include <string>
 #include <vector>
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 
 namespace OpenGL::Geometry {
 
 class Sphere : public Shape {
  public:
-  Sphere(const glm::vec3& position, float radius, const char* atlas = nullptr, int x = 0,
-         int y = 0, int w = 0, int h = 0, int latitudeSegments = 16, int longitudeSegments = 32);
+  // The texture is looked up by `regionName` in the supplied `atlas` on the
+  // first call to `init()`.
+  Sphere(const glm::vec3& position, float radius, OpenGL::Core::TextureAtlas& atlas,
+         std::string regionName, int latitudeSegments = 16, int longitudeSegments = 32);
 
   ~Sphere();
 
   void init() override;
-  void draw(GLuint shaderID, float deltaTime) override;
+  void draw(GLuint shaderID, float deltaTime, GLFWwindow* window) override;
 
  private:
   void generateSphere();
@@ -29,8 +30,8 @@ class Sphere : public Shape {
   int longitudeSegments_;  // Number of vertical segments (slices)
 
   // Texture atlas info
-  const char* atlasPath;
-  int X, Y, W, H;
+  OpenGL::Core::TextureAtlas& atlas_;
+  std::string regionName_;
   GLuint textureID;
 
   std::vector<Vertex> vertices_;

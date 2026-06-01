@@ -1,8 +1,11 @@
-#ifndef BOARD_3D
-#define BOARD_3D
+#ifndef OPENGL_GAME_OBJECTS_BOARD_3D_H
+#define OPENGL_GAME_OBJECTS_BOARD_3D_H
 
 #include <iostream>
+#include <string>
+#include <utility>
 #include <cylinder.h>
+#include <texture_atlas.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -17,8 +20,10 @@ struct BoundingBox2D;
 namespace OpenGL::Game::Objects {
 class Board3D : public OpenGL::Geometry::Cylinder {
  public:
-  Board3D();
-  void draw(GLuint ShaderID, float deltaTime) override;
+  // `sidesRegion` and `capsRegion` must exist in `atlas`
+  // (e.g. "board_sides", "board_caps").
+  Board3D(OpenGL::Core::TextureAtlas& atlas, std::string sidesRegion, std::string capsRegion);
+  void draw(GLuint ShaderID, float deltaTime, GLFWwindow* window) override;
 
   // Collision support for managers
   Managers::BoundingBox2D getCollisionBox() const;
@@ -40,4 +45,4 @@ class Board3D : public OpenGL::Geometry::Cylinder {
   static constexpr float BOARD_HEIGHT = 0.15f;
 };
 }  // namespace OpenGL::Game::Objects
-#endif  // BOARD_3D
+#endif  // OPENGL_GAME_OBJECTS_BOARD_3D_H

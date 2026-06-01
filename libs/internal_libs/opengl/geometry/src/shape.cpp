@@ -1,11 +1,6 @@
 #include "shape.h"
-#include "textures.h"
 
 namespace OpenGL::Geometry {
-
-void Shape::setTexture(std::shared_ptr<OpenGL::Core::Textures> tex) { texture = std::move(tex); }
-
-unsigned int Shape::getTextureId() const { return texture ? texture->getTexture() : 0; }
 
 void Shape::setPosition(const glm::vec3& pos) {
   position_ = pos;

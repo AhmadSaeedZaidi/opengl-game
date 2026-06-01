@@ -28,6 +28,9 @@ class OrbitCamera {
   double lastMouseX_, lastMouseY_;
   float sensitivity_;
 
+  // Edge-trigger state for the R-key camera reset.
+  bool rKeyWasPressed_ = false;
+
   // Camera vectors
   glm::vec3 position_;
   glm::vec3 target_;

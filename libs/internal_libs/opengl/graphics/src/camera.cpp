@@ -49,10 +49,12 @@ void OpenGL::Graphics::OrbitCamera::processMouseInput(GLFWwindow* window) {
     updatePosition();
   }
 
-  // Reset camera with R key
-  if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+  // Reset camera with R key (edge-triggered: only on the press transition).
+  const bool rKeyPressed = glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS;
+  if (rKeyPressed && !rKeyWasPressed_) {
     reset();
   }
+  rKeyWasPressed_ = rKeyPressed;
 }
 
 void OpenGL::Graphics::OrbitCamera::reset() {

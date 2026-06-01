@@ -2,6 +2,7 @@
 #define OPENGL_GAME_OBJECTS_BALL_H
 
 #include "sphere.h"
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
 namespace OpenGL::Game::Managers {
@@ -12,11 +13,16 @@ namespace OpenGL::Game::Objects {
 
 class Ball : public OpenGL::Geometry::Sphere {
  public:
-  Ball(const glm::vec3& position, float radius = 0.05f);
+  // Standard breakout-ball radius (5cm in world units).
+  static constexpr float DEFAULT_RADIUS = 0.05f;
+
+  // `regionName` must be present in `atlas` (e.g. "ball").
+  Ball(const glm::vec3& position, OpenGL::Core::TextureAtlas& atlas, std::string regionName,
+       float radius = DEFAULT_RADIUS);
   ~Ball() = default;
 
   void update(float deltaTime);
-  void draw(GLuint shaderID, float deltaTime) override;
+  void draw(GLuint shaderID, float deltaTime, GLFWwindow* window) override;
 
   // 2D Physics (X/Y plane only)
   void setVelocity2D(const glm::vec2& velocity) { velocity2D_ = velocity; }

@@ -1,5 +1,5 @@
-#ifndef TEXTURES
-#define TEXTURES
+#ifndef OPENGL_CORE_TEXTURES_H
+#define OPENGL_CORE_TEXTURES_H
 #include <glad/glad.h>
 #include <string>
 namespace OpenGL::Core {
@@ -27,4 +27,4 @@ class Textures {
   unsigned int texture = 0;
 };
 }  // namespace OpenGL::Core
-#endif
+#endif  // OPENGL_CORE_TEXTURES_H

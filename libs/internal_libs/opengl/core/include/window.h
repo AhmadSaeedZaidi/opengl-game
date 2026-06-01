@@ -1,5 +1,6 @@
-#ifndef WINDOW
-#define WINDOW
+#ifndef OPENGL_CORE_WINDOW_H
+#define OPENGL_CORE_WINDOW_H
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <string>
@@ -22,4 +23,4 @@ class WindowApp {
   bool glfwInitialized_ = false;
 };
 }  // namespace OpenGL::Core
-#endif
+#endif  // OPENGL_CORE_WINDOW_H

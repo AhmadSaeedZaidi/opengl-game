@@ -1,22 +1,17 @@
 #include "cylinder.h"
+#include "log.h"
 #include <iostream>
 #include <cmath>
 
 OpenGL::Geometry::Cylinder::Cylinder(const glm::vec3& position, float radius, float height,
-                                     const char* atlas, int x1, int y1, int w1, int h1, int x2,
-                                     int y2, int w2, int h2, int segments)
+                                     OpenGL::Core::TextureAtlas& atlas, std::string sidesRegion,
+                                     std::string capsRegion, int segments)
     : radius_(radius),
       height_(height),
       segments_(segments),
-      atlasPath(atlas),
-      X1(x1),
-      Y1(y1),
-      W1(w1),
-      H1(h1),
-      X2(x2),
-      Y2(y2),
-      W2(w2),
-      H2(h2),
+      atlas_(atlas),
+      sidesRegion_(std::move(sidesRegion)),
+      capsRegion_(std::move(capsRegion)),
       sidesTexID(0),
       capsTexID(0) {
   position_ = position;
@@ -36,26 +31,25 @@ void OpenGL::Geometry::Cylinder::init() {
   generateCylinder();
 
   if (VAO == 0) {
-    std::cout << "ERROR: Cylinder VAO not created!" << std::endl;
+    std::cerr << "ERROR: Cylinder VAO not created!" << std::endl;
   } else {
+#if OPENGL_VERBOSE_LOG
     std::cout << "Cylinder VAO created: " << VAO << " (segments: " << segments_ << ")"
               << std::endl;
+#endif
   }
 
-  // Load textures if atlas is provided
-  if (atlasPath) {
-    int imgW, imgH, imgC;
-    sidesTexID =
-        OpenGL::Core::Textures::loadTextureRegion(atlasPath, imgW, imgH, imgC, X1, Y1, W1, H1);
-    capsTexID =
-        OpenGL::Core::Textures::loadTextureRegion(atlasPath, imgW, imgH, imgC, X2, Y2, W2, H2);
+  // Look up both regions in the atlas. Throws if either name is unknown.
+  const OpenGL::Core::TextureRegion& sidesRegion = atlas_.getRegion(sidesRegion_);
+  const OpenGL::Core::TextureRegion& capsRegion = atlas_.getRegion(capsRegion_);
+  sidesTexID = sidesRegion.textureId();
+  capsTexID = capsRegion.textureId();
 
-    if (!sidesTexID) {
-      std::cerr << "Failed to load cylinder sides texture" << std::endl;
-    }
-    if (!capsTexID) {
-      std::cerr << "Failed to load cylinder caps texture" << std::endl;
-    }
+  if (!sidesTexID) {
+    std::cerr << "Failed to load cylinder sides texture (region '" << sidesRegion_ << "')\n";
+  }
+  if (!capsTexID) {
+    std::cerr << "Failed to load cylinder caps texture (region '" << capsRegion_ << "')\n";
   }
 }
 
@@ -213,9 +207,9 @@ void OpenGL::Geometry::Cylinder::generateCapVertices() {
 
 void OpenGL::Geometry::Cylinder::updateModelMatrix() { Shape::updateModelMatrix(); }
 
-void OpenGL::Geometry::Cylinder::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Geometry::Cylinder::draw(GLuint shaderID, float deltaTime, GLFWwindow* /*window*/) {
   if (VAO == 0) {
-    std::cout << "ERROR: Trying to draw cylinder with VAO = 0!" << std::endl;
+    std::cerr << "ERROR: Trying to draw cylinder with VAO = 0!" << std::endl;
     return;
   }
 

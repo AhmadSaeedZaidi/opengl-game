@@ -1,11 +1,14 @@
 #include "managers/collision_manager.h"
+#include "log.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 
 OpenGL::Game::Managers::CollisionManager::CollisionManager(GameStateManager& gameState)
     : gameState_(gameState) {
+#if OPENGL_VERBOSE_LOG
   std::cout << "Collision Manager initialized" << std::endl;
+#endif
 }
 
 void OpenGL::Game::Managers::CollisionManager::setBoundaries(float minX, float maxX, float minY,
@@ -14,8 +17,10 @@ void OpenGL::Game::Managers::CollisionManager::setBoundaries(float minX, float m
   WORLD_MAX_X = maxX;
   WORLD_MIN_Y = minY;
   WORLD_MAX_Y = maxY;
+#if OPENGL_VERBOSE_LOG
   std::cout << "Boundaries set: X[" << minX << "," << maxX << "] Y[" << minY << "," << maxY << "]"
             << std::endl;
+#endif
 }
 
 void OpenGL::Game::Managers::CollisionManager::checkAllCollisions(
@@ -52,7 +57,9 @@ void OpenGL::Game::Managers::CollisionManager::checkBallBrickCollisions(
         glm::vec2 newVelocity = calculateBounce(ballCircle, ball->getVelocity2D(), brickBox);
         ball->setBounceVelocity(newVelocity);  // Pure physics bounce
 
+#if OPENGL_VERBOSE_LOG
         std::cout << "Brick destroyed!" << std::endl;
+#endif
         break;  // Only handle one collision per frame
       }
     }
@@ -84,7 +91,9 @@ void OpenGL::Game::Managers::CollisionManager::checkBallBoardCollisions(Objects:
     // BOOST PADDLE SPEED!
     board->onBallHit();
 
+#if OPENGL_VERBOSE_LOG
     std::cout << "Ball hit paddle! Both speeds boosted!" << std::endl;
+#endif
   }
 }
 
@@ -117,8 +126,15 @@ void OpenGL::Game::Managers::CollisionManager::checkBallBoundaries(Objects::Ball
   // Kill plane (bottom)
   if (ballPos.y - radius <= WORLD_MIN_Y) {
     gameState_.loseLife();
-    ball->resetToStart();
-    std::cout << "Ball fell out of bounds!" << std::endl;
+    if (gameState_.getLives() <= 0) {
+      // No more lives — let the ball stay fallen; GAME_OVER banner will show.
+      std::cout << "Ball fell out of bounds! GAME OVER" << std::endl;
+    } else {
+      ball->resetToStart();
+#if OPENGL_VERBOSE_LOG
+      std::cout << "Ball fell out of bounds!" << std::endl;
+#endif
+    }
     return;
   }
 

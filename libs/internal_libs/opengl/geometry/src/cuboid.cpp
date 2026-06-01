@@ -1,4 +1,5 @@
 #include "cuboid.h"
+#include "log.h"
 #include <iostream>
 
 // Cube vertices with positions, normals, texture coordinates
@@ -57,17 +58,11 @@ static const unsigned int cubeIndices[] = {
     20, 21, 22, 22, 23, 20};
 
 OpenGL::Geometry::Cuboid::Cuboid(const glm::vec3& position, const glm::vec3& size,
-                                 const char* atlas, int x1, int y1, int w1, int h1, int x2, int y2,
-                                 int w2, int h2)
-    : atlasPath(atlas),
-      X1(x1),
-      Y1(y1),
-      W1(w1),
-      H1(h1),
-      X2(x2),
-      Y2(y2),
-      W2(w2),
-      H2(h2),
+                                 OpenGL::Core::TextureAtlas& atlas, std::string sidesRegion,
+                                 std::string capsRegion)
+    : atlas_(atlas),
+      sidesRegion_(std::move(sidesRegion)),
+      capsRegion_(std::move(capsRegion)),
       sidesTexID(0),
       capsTexID(0) {
   // Initialize base class members properly
@@ -88,25 +83,24 @@ void OpenGL::Geometry::Cuboid::init() {
   setupVertices();
 
   if (VAO == 0) {
-    std::cout << "ERROR: VAO not created!" << std::endl;
+    std::cerr << "ERROR: VAO not created!" << std::endl;
   } else {
+#if OPENGL_VERBOSE_LOG
     std::cout << "VAO created: " << VAO << std::endl;
+#endif
   }
 
-  // Load textures if atlas is provided
-  if (atlasPath) {
-    int imgW, imgH, imgC;
-    sidesTexID =
-        OpenGL::Core::Textures::loadTextureRegion(atlasPath, imgW, imgH, imgC, X1, Y1, W1, H1);
-    capsTexID =
-        OpenGL::Core::Textures::loadTextureRegion(atlasPath, imgW, imgH, imgC, X2, Y2, W2, H2);
+  // Look up both regions in the atlas. Throws if either name is unknown.
+  const OpenGL::Core::TextureRegion& sidesRegion = atlas_.getRegion(sidesRegion_);
+  const OpenGL::Core::TextureRegion& capsRegion = atlas_.getRegion(capsRegion_);
+  sidesTexID = sidesRegion.textureId();
+  capsTexID = capsRegion.textureId();
 
-    if (!sidesTexID) {
-      std::cerr << "Failed to load sides texture: " << atlasPath << std::endl;
-    }
-    if (!capsTexID) {
-      std::cerr << "Failed to load caps texture: " << atlasPath << std::endl;
-    }
+  if (!sidesTexID) {
+    std::cerr << "Failed to load cuboid sides texture (region '" << sidesRegion_ << "')\n";
+  }
+  if (!capsTexID) {
+    std::cerr << "Failed to load cuboid caps texture (region '" << capsRegion_ << "')\n";
   }
 }
 
@@ -143,9 +137,9 @@ void OpenGL::Geometry::Cuboid::updateModelMatrix() {
   Shape::updateModelMatrix();
 }
 
-void OpenGL::Geometry::Cuboid::draw(GLuint shaderID, float deltaTime) {
+void OpenGL::Geometry::Cuboid::draw(GLuint shaderID, float deltaTime, GLFWwindow* /*window*/) {
   if (VAO == 0) {
-    std::cout << "ERROR: Trying to draw with VAO = 0!" << std::endl;
+    std::cerr << "ERROR: Trying to draw with VAO = 0!" << std::endl;
     return;
   }
 

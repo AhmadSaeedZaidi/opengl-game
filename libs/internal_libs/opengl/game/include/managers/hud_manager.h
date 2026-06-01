@@ -29,17 +29,23 @@ private:
     void renderControls();
     void clearLine();
     void printBorder();
-    
+
     GameStateManager& gameState_;
-    
+
     float updateTimer_;
     float updateInterval_; // How often to update display (seconds)
     bool initialized_;
-    
+
     // Cache previous values to avoid spam
     int lastScore_;
     int lastLives_;
     GameState lastState_;
+
+    // One-shot banner flags. Reset whenever the game returns to PLAYING so
+    // banners reappear after a Space-to-reset.
+    bool gameOverShown_ = false;
+    bool winShown_ = false;
+    bool pausedShown_ = false;
 };
 
 } // namespace OpenGL::Game::Managers

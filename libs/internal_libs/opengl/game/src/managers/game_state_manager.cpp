@@ -1,4 +1,5 @@
 #include "managers/game_state_manager.h"
+#include "log.h"
 
 OpenGL::Game::Managers::GameStateManager::GameStateManager()
     : state_(GameState::PLAYING),
@@ -6,7 +7,9 @@ OpenGL::Game::Managers::GameStateManager::GameStateManager()
       score_(0),
       bricksDestroyed_(0),
       remainingBricks_(0) {  // ADD: remainingBricks_(0)
+#if OPENGL_VERBOSE_LOG
   std::cout << "Game State Manager initialized" << std::endl;
+#endif
 }
 
 void OpenGL::Game::Managers::GameStateManager::setState(GameState state) {
@@ -14,6 +17,7 @@ void OpenGL::Game::Managers::GameStateManager::setState(GameState state) {
   state_ = state;
 
   if (oldState != state) {
+#if OPENGL_VERBOSE_LOG
     switch (state) {
       case GameState::PLAYING:
         std::cout << "Game State: PLAYING" << std::endl;
@@ -28,12 +32,15 @@ void OpenGL::Game::Managers::GameStateManager::setState(GameState state) {
         std::cout << "Game State: YOU WIN!" << std::endl;
         break;
     }
+#endif
   }
 }
 
 void OpenGL::Game::Managers::GameStateManager::loseLife() {
   lives_--;
+#if OPENGL_VERBOSE_LOG
   std::cout << "Life lost! Lives remaining: " << lives_ << std::endl;
+#endif
 
   if (lives_ <= 0) {
     setState(GameState::GAME_OVER);
@@ -42,7 +49,9 @@ void OpenGL::Game::Managers::GameStateManager::loseLife() {
 
 void OpenGL::Game::Managers::GameStateManager::addScore(int points) {
   score_ += points;
+#if OPENGL_VERBOSE_LOG
   std::cout << "Score: " << score_ << " (+" << points << ")" << std::endl;
+#endif
 }
 
 void OpenGL::Game::Managers::GameStateManager::reset() {
@@ -51,10 +60,13 @@ void OpenGL::Game::Managers::GameStateManager::reset() {
   score_ = 0;
   bricksDestroyed_ = 0;
   remainingBricks_ = 0;  // ADD: Reset remaining bricks
+#if OPENGL_VERBOSE_LOG
   std::cout << "Game state reset! Lives: " << lives_ << " | Score: " << score_ << std::endl;
+#endif
 }
 
 void OpenGL::Game::Managers::GameStateManager::printStatus() const {
+#if OPENGL_VERBOSE_LOG
   std::cout << "Status: Lives=" << lives_ << " Score=" << score_ << " Bricks=" << bricksDestroyed_
             << " Remaining=" << remainingBricks_ << " State=";
   switch (state_) {
@@ -72,4 +84,5 @@ void OpenGL::Game::Managers::GameStateManager::printStatus() const {
       break;
   }
   std::cout << std::endl;
+#endif
 }
