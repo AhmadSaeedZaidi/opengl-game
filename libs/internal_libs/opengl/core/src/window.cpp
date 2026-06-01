@@ -4,9 +4,10 @@
 OpenGL::Core::WindowApp::WindowApp(int width, int height, const char* title)
     : width(width), height(height), title(title) {
   if (!glfwInit()) {
-    std::cout << "Failed to initialize GLFW\n";
+    std::cerr << "Failed to initialize GLFW\n";
     return;
   }
+  glfwInitialized_ = true;
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -14,17 +15,16 @@ OpenGL::Core::WindowApp::WindowApp(int width, int height, const char* title)
   window = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
   if (!window) {
-    std::cout << "Failed to create GLFW window\n";
-    glfwTerminate();
+    std::cerr << "Failed to create GLFW window\n";
     return;
   }
   glfwSetWindowPos(window, 720, 50);
   glfwMakeContextCurrent(window);
 
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-    std::cout << "Failed to initialize GLAD\n";
+    std::cerr << "Failed to initialize GLAD\n";
     glfwDestroyWindow(window);
-    glfwTerminate();
+    window = nullptr;
     return;
   }
 
@@ -32,8 +32,14 @@ OpenGL::Core::WindowApp::WindowApp(int width, int height, const char* title)
 }
 
 OpenGL::Core::WindowApp::~WindowApp() {
-  glfwDestroyWindow(window);
-  glfwTerminate();
+  if (window) {
+    glfwDestroyWindow(window);
+    window = nullptr;
+  }
+  if (glfwInitialized_) {
+    glfwTerminate();
+    glfwInitialized_ = false;
+  }
 }
 
 void OpenGL::Core::WindowApp::run() {

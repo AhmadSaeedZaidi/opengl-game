@@ -1,7 +1,7 @@
 #ifndef WINDOW
 #define WINDOW
 #include <glad/glad.h>
-#include <glfw/glfw3.h>
+#include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 namespace OpenGL::Core {
@@ -16,9 +16,10 @@ class WindowApp {
   virtual void update(float deltaTime);
   virtual void init();
   virtual void processInput();
-  GLFWwindow* window;
+  GLFWwindow* window = nullptr;
   int height, width;
   const char* title;
+  bool glfwInitialized_ = false;
 };
 }  // namespace OpenGL::Core
 #endif

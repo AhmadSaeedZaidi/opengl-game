@@ -37,13 +37,11 @@ void OpenGL::Game::Game::init() {
   // Initialize shader
   shader_.use();
 
-  // Set texture uniforms
+  // Configure shader texture samplers and flags
   shader_.setInt("sidesTexture", 0);
   shader_.setInt("capsTexture", 1);
-  shader_.setInt("sphereTexture", 2);
   shader_.setBool("hasSidesTexture", true);
   shader_.setBool("hasCapsTexture", true);
-  shader_.setBool("hasTexture", true);
 
   // Initialize all shapes
   std::cout << "Game::init() - Initializing " << shapes_.size() << " shapes" << std::endl;

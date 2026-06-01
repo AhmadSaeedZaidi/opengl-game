@@ -47,10 +47,9 @@ void OpenGL::Geometry::Plane::init() {
 
   glBindVertexArray(0);
 
-  // Load texture
   if (texturePath_) {
-    auto textureLoader = std::make_unique<OpenGL::Core::Textures>(texturePath_);
-    textureID_ = textureLoader->getTexture();
+    int w, h, c;
+    textureID_ = OpenGL::Core::Textures::loadTexture(texturePath_, w, h, c);
   }
 
   std::cout << "Plane initialized" << std::endl;

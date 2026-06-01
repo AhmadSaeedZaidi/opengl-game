@@ -24,7 +24,7 @@ class Textures {
   virtual void init();
   const char* texturePath;
   int height, width, nrChannels;
-  unsigned int texture;
+  unsigned int texture = 0;
 };
 }  // namespace OpenGL::Core
 #endif
