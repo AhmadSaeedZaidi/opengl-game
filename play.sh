@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Builds the OpenGL game on Linux/macOS using cmake and make.
-# Mirrors play.bat for Windows.
+# Runs the game. Assumes ./install.sh has been run at least once.
 
 set -euo pipefail
 
@@ -8,12 +7,11 @@ BUILD_DIR="build"
 PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$PROJECT_ROOT"
 
-if [ -d "$BUILD_DIR" ]; then
-    rm -rf "$BUILD_DIR"
+if [ ! -x "$BUILD_DIR/apps/my_game" ]; then
+    echo "error: $BUILD_DIR/apps/my_game not found." >&2
+    echo "       run ./install.sh first." >&2
+    exit 1
 fi
 
-cmake -B "$BUILD_DIR" -G "Unix Makefiles"
-make -C "$BUILD_DIR" -j"$(nproc)"
-
 cd "$BUILD_DIR/apps"
-./my_game
+exec ./my_game

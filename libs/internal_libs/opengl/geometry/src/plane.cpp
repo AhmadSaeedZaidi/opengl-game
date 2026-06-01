@@ -3,8 +3,17 @@
 #include <iostream>
 
 OpenGL::Geometry::Plane::Plane(const glm::vec3& position, float width, float height,
-                                 OpenGL::Core::TextureAtlas& atlas, std::string regionName)
-    : width_(width), height_(height), atlas_(atlas), regionName_(std::move(regionName)), textureID_(0) {
+                                 OpenGL::Core::TextureAtlas& atlas, std::string regionName,
+                                 float uMin, float uMax, float vMin, float vMax)
+    : width_(width),
+      height_(height),
+      uMin_(uMin),
+      uMax_(uMax),
+      vMin_(vMin),
+      vMax_(vMax),
+      atlas_(atlas),
+      regionName_(std::move(regionName)),
+      textureID_(0) {
   position_ = position;
   scale_ = glm::vec3(1.0f);
   updateModelMatrix();
@@ -73,22 +82,22 @@ void OpenGL::Geometry::Plane::generatePlane() {
   // Bottom-left
   v1.position = glm::vec3(-halfWidth, -halfHeight, 0.0f);
   v1.normal = glm::vec3(0.0f, 0.0f, 1.0f);  // Normal pointing towards camera
-  v1.texCoord = glm::vec2(0.0f, 0.0f);
+  v1.texCoord = glm::vec2(uMin_, vMin_);
 
   // Bottom-right
   v2.position = glm::vec3(halfWidth, -halfHeight, 0.0f);
   v2.normal = glm::vec3(0.0f, 0.0f, 1.0f);
-  v2.texCoord = glm::vec2(1.0f, 0.0f);
+  v2.texCoord = glm::vec2(uMax_, vMin_);
 
   // Top-right
   v3.position = glm::vec3(halfWidth, halfHeight, 0.0f);
   v3.normal = glm::vec3(0.0f, 0.0f, 1.0f);
-  v3.texCoord = glm::vec2(1.0f, 1.0f);
+  v3.texCoord = glm::vec2(uMax_, vMax_);
 
   // Top-left
   v4.position = glm::vec3(-halfWidth, halfHeight, 0.0f);
   v4.normal = glm::vec3(0.0f, 0.0f, 1.0f);
-  v4.texCoord = glm::vec2(0.0f, 1.0f);
+  v4.texCoord = glm::vec2(uMin_, vMax_);
 
   vertices_ = {v1, v2, v3, v4};
 

@@ -58,11 +58,15 @@ void OpenGL::Game::Game::init() {
   shader_.setBool("hasCapsTexture", true);
 
   // Background plane. Created after the GL context exists so Plane::init() can
-  // upload the texture. If the region is missing or the file is unreadable the
-  // plane still draws (as an untextured quad) — graceful degradation.
+  // upload the texture. The plane is square and the texture UVs are cropped to
+  // the center 9/16 of the 16:9 source image so the player sees a centered
+  // square view that fills the square window. If the region is missing or the
+  // file is unreadable the plane still draws (as an untextured quad) — graceful
+  // degradation.
   backgroundPlane_ = std::make_unique<OpenGL::Geometry::Plane>(
-      glm::vec3(0.0f, 0.0f, BACKGROUND_Z), BACKGROUND_WIDTH, BACKGROUND_HEIGHT, *atlas_,
-      BACKGROUND_REGION);
+      glm::vec3(0.0f, 0.0f, BACKGROUND_Z), BACKGROUND_SIZE, BACKGROUND_SIZE, *atlas_,
+      BACKGROUND_REGION, BACKGROUND_UV_MIN_U, BACKGROUND_UV_MAX_U, BACKGROUND_UV_MIN_V,
+      BACKGROUND_UV_MAX_V);
   backgroundPlane_->init();
 
   // Initialize game objects

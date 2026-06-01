@@ -16,7 +16,7 @@ OpenGL::Geometry::Cylinder::Cylinder(const glm::vec3& position, float radius, fl
       capsTexID(0) {
   position_ = position;
   scale_ = glm::vec3(1.0f);
-  rotation_ = glm::vec3(180.0f, 0.0f, 0.0f);
+  rotation_ = glm::vec3(270.0f, 0.0f, 0.0f);
   updateModelMatrix();
 }
 

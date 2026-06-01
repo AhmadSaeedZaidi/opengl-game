@@ -38,11 +38,18 @@ class Game : public OpenGL::Core::WindowApp {
 
   // Background plane. Sits behind the play area in world space (low z) and
   // uses the "background" region of the atlas. Drawn first so depth testing
-  // naturally occludes nothing of the play area.
+  // naturally occludes nothing of the play area. The plane is square (the
+  // window is square) and the texture UVs are cropped to the center square
+  // of the 16:9 source image so the player sees a centered, undistorted
+  // square view of the background.
   static constexpr const char* BACKGROUND_REGION = "background";
-  static constexpr float BACKGROUND_WIDTH = 20.0f;    // 16:9 ratio
-  static constexpr float BACKGROUND_HEIGHT = 11.25f;  // 20 * 9/16
-  static constexpr float BACKGROUND_Z = -10.0f;       // far behind the play area
+  static constexpr float BACKGROUND_SIZE = 12.5f;   // square; matches visible area at Z=-10
+  static constexpr float BACKGROUND_Z = -10.0f;      // far behind the play area
+  // Center-square crop of a 16:9 image: U spans the middle 9/16 of the width.
+  static constexpr float BACKGROUND_UV_MIN_U = 7.0f / 32.0f;   // (1 - 9/16) / 2
+  static constexpr float BACKGROUND_UV_MAX_U = 25.0f / 32.0f;  // 1 - 7/32
+  static constexpr float BACKGROUND_UV_MIN_V = 0.0f;
+  static constexpr float BACKGROUND_UV_MAX_V = 1.0f;
 
   Game(int width, int height, const char* title, const char* vertexShader,
        const char* fragmentShader);
